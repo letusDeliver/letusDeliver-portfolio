@@ -23,6 +23,14 @@ npm start          # dev server at http://localhost:4200
 ```
 
 ```bash
+# Docker
+docker build -t letusdeliver .
+docker run --rm -p 4000:4000 letusdeliver
+# or with Docker Compose
+docker compose up --build
+```
+
+```bash
 npm run build      # production build + SSR + prerendering -> dist/letusdeliver
 npm test           # unit tests (Vitest)
 npm run lint        # ESLint
