@@ -27,6 +27,8 @@ export interface Founder {
   name: string;
   role: string;
   yearsExperience: string;
+  /** Path under /public to a real headshot. Omit to fall back to an initials avatar. */
+  photoUrl?: string;
   summary: string;
   philosophy: string;
   expertise: string[];

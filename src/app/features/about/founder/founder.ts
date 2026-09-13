@@ -5,6 +5,7 @@ import { Button } from '../../../shared/ui/button/button';
 import { Reveal } from '../../../shared/directives/reveal';
 import { SeoService } from '../../../core/seo/seo.service';
 import { personSchema } from '../../../core/seo/structured-data';
+import { siteConfig } from '../../../core/config/site.config';
 import { FOUNDERS, PROJECTS } from '../../../core/data';
 
 const OWNERSHIP_LABEL: Record<string, string> = {
@@ -42,6 +43,7 @@ export class FounderPage {
           description: founder.summary,
           path: `/about/${founder.slug}`,
           type: 'profile',
+          ...(founder.photoUrl ? { image: `${siteConfig.siteUrl}${founder.photoUrl}` } : {}),
         });
         this.seo.setStructuredData('ld-person', personSchema(founder));
       }

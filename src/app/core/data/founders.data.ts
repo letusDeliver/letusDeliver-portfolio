@@ -12,6 +12,7 @@ export const FOUNDERS: Founder[] = [
     name: 'Kunal',
     role: 'Co-Founder · Full-Stack & Frontend Architect',
     yearsExperience: '4.5+ years',
+    photoUrl: '/images/kunal-profile.jpg',
     summary:
       'Senior Software Engineer with 4.5+ years of experience designing and building enterprise-scale web applications with Angular (v12–v21), TypeScript, RxJS and Signals. Deep expertise in component-driven and standalone architecture, reactive state patterns, performance optimization and accessibility (WCAG/ARIA), with production experience delivering PrimeNG- and Angular Material-based UI in Agile teams. Complements frontend depth with hands-on backend engineering (Node.js, Express, PostgreSQL/Prisma, JWT auth, RBAC) and enterprise micro-frontend architecture (Native Federation), built through self-directed, production-grade engineering projects.',
     philosophy:
@@ -103,9 +104,10 @@ export const FOUNDERS: Founder[] = [
       },
     ],
     projectSlugs: [
-      'employee-management-system',
       'enterprise-micro-frontend-shell',
+      'employee-management-system',
       'multi-tenant-hospital-management-system',
+      'donezo',
       'personal-portfolio',
     ],
     certifications: [
@@ -125,6 +127,7 @@ export const FOUNDERS: Founder[] = [
     name: 'Mrityunjay',
     role: 'Co-Founder · Python & Cloud Engineer',
     yearsExperience: '4+ years',
+    photoUrl: '/images/mrityunjay-profile.jpg',
     summary:
       'Senior Python Backend Engineer with 4+ years of experience architecting scalable backend services, REST APIs, cloud-native data platforms and CI/CD pipelines across 20+ production projects. Core strengths in API design, database optimization, cloud data processing, production reliability, Docker containerization and secure CI/CD delivery.',
     philosophy:
@@ -180,7 +183,13 @@ export const FOUNDERS: Founder[] = [
         ],
       },
     ],
-    projectSlugs: ['nightwatch-platform', 'enterprise-data-pipelines', 'full-stack-product-applications'],
+    projectSlugs: [
+      'ibkr-signal-scanner',
+      'flowmedic',
+      'nightwatch-platform',
+      'enterprise-data-pipelines',
+      'full-stack-product-applications',
+    ],
     certifications: [
       { name: 'Astronomer Airflow Certification', issuer: 'Astronomer', date: 'Apache Airflow workflow orchestration and data pipeline engineering' },
       { name: 'Google Cloud Platform', issuer: 'Google Cloud', date: 'Professional learning in cloud computing, BigQuery, and GCP services' },

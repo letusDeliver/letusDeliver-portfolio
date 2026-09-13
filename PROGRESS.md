@@ -2,7 +2,7 @@
 
 **Read this file first if you're picking this project back up in a new session.** It exists so a fresh session (with no prior context) can understand what exists, why decisions were made, what's still missing, and where to pick up — without re-deriving anything from scratch.
 
-Last updated: 2026-09-13
+Last updated: 2026-09-13 (branding assets — see §13; founder profile photos — see §14)
 
 ---
 
@@ -12,11 +12,11 @@ A production-quality Angular company website for **letusdeliver**, a founder-led
 
 The full original build brief (~40 sections covering positioning, design system, architecture, every page's content, accessibility, SEO, testing, CI, and a strict content-integrity policy) was given as one long spec at the start of this project. That spec is not stored anywhere else — this file is the durable record of what was actually built from it and how it maps to the code.
 
-**Project root:** `D:\Start-up\letusdeliver` (the repo). The parent `D:\Start-up` is just a container directory.
+**Project root:** `D:\Start-up\letusdeliver` (the repo, pushed to `https://github.com/letusDeliver/letusDeliver-portfolio.git` on `main`). The parent `D:\Start-up` is just a container directory that also holds `Github-Analysis/` (see §3).
 
 ## 2. Source-of-truth resumes (content integrity)
 
-All founder facts, skills, employers, dates, projects, and certifications came from two resumes read in full before writing any content:
+All founder facts, skills, employers, dates, projects, and certifications originally came from two resumes read in full before writing any content:
 
 - `C:\Users\singh\Downloads\Resume.pdf` — Kunal's resume (Senior Software Engineer, Angular/TypeScript, 4.5+ years — note the PDF header says "5 years" but the body text says "4.5+ years"; **4.5+ years is what was used**, matching the docx version and the company's own stated combined-experience figure).
 - `C:\Users\singh\Downloads\Mrityunjay_Kumar_Resume_1.pdf` — Mrityunjay's resume (Senior Python Backend Engineer, 4+ years).
@@ -28,31 +28,68 @@ Content-integrity rule baked into the data model (`src/app/core/models/project.m
 
 There is currently **zero real `letusdeliver`-owned client work** — the company is new. Do not invent any until the user supplies real project details.
 
-## 3. Tech stack & key architectural decisions
+## 3. Second content source: independent GitHub repository analysis
+
+At `D:\Start-up\Github-Analysis\` there are deep, independently-verified analyses of six of the founders' real GitHub repositories — each repo was cloned into `Github-Analysis\_clones\`, then actually installed, built, linted and tested (not assessed from README claims alone):
+
+- `portfolio-overall-analysis.md` — recommended portfolio order/strategy across all six repos
+- `portfolio-project-comparison.md` — cross-project comparison table
+- `employee-management-backend-portfolio-analysis.md` → repo `letusDeliver/employee-management-backend` (Kunal's "Employee Management System")
+- `multi-app-architecture-system-portfolio-analysis.md` → repo `letusDeliver/multi-app-architecture-system` (Kunal's "Enterprise Micro-Frontend Shell")
+- `ibkr-webapp-portfolio-analysis.md` → repo `Mrityunjay1997/ibkr-webapp-main` (new — see §4)
+- `flowmedic-portfolio-analysis.md` → repo `Mrityunjay1997/flowmedic` (new — see §4)
+- `donezo-portfolio-analysis.md` → repo `letusDeliver/Donezo` (new — see §4)
+- `angular-crashcourse-tracker-app-portfolio-analysis.md` → repo `letusDeliver/angular-crashCourse-tracker-app` — **deliberately excluded from the site** (see §4)
+
+This directory is **not part of the Angular repo** — it lives alongside it at `D:\Start-up\Github-Analysis\`, outside `letusdeliver/`. If asked to update project content again, re-read the relevant `*-portfolio-analysis.md` file rather than relying on this summary.
+
+## 4. What changed in the portfolio-analysis update (2026-09-13)
+
+Using the analysis in §3, `src/app/core/data/projects.data.ts` and `founders.data.ts` were updated:
+
+- **`employee-management-system`** (Kunal) — enriched with verified detail (permission-scoped `resource:action:scope` RBAC, timing-safe login, `tokensValidAfter` retroactive logout invalidation, Zod-schema-generated OpenAPI docs, a hand-written partial unique index working around a Prisma DSL limit) and given its real `githubUrl`: `https://github.com/letusDeliver/employee-management-backend`.
+- **`enterprise-micro-frontend-shell`** (Kunal) — enriched with verified detail (58/58 passing tests, GitHub Actions CI with a permanent "empty-shell" gate, the four named Shell Public API communication patterns, shell-attributed/unforgeable ownership scoping) and given its real `githubUrl`: `https://github.com/letusDeliver/multi-app-architecture-system`.
+- **`donezo`** (new, Kunal, `ownershipType: 'personal'`) — an in-progress Angular 20 Kanban tracker. Explicitly labeled `statusLabel: 'Work in progress'` — the analysis found most screens are empty stubs and the production build fails out of the box; only the Kanban board (RxJS debounce/pagination) is genuinely built. `githubUrl`: `https://github.com/letusDeliver/Donezo`.
+- **`ibkr-signal-scanner`** (new, Mrityunjay, `ownershipType: 'personal'`) — a real, actively-used Flask trading tool integrating directly with Interactive Brokers' native socket API, verified by a passing 66-test suite. Labeled `statusLabel: 'Actively used'`. **`githubUrl` deliberately omitted — see §4a, this needs your decision, not a default.**
+- **`flowmedic`** (new, Mrityunjay, `ownershipType: 'personal'`) — an Apache Airflow 3.x hackathon incident-response DAG with real HITL (`ApprovalOperator`) usage. Labeled `statusLabel: 'Hackathon MVP'`. `githubUrl`: `https://github.com/Mrityunjay1997/flowmedic`. **Framing note:** the analysis found the "AI diagnosis" step is a hardcoded deterministic function, not a real LLM call, despite the repo's own README implying otherwise — the site copy was written to describe this honestly (a "deterministic placeholder ahead of a planned LLM integration"), not as an "AI-powered" feature. Keep it that way if this project is ever touched again; do not upgrade the language to "AI-powered" unless the repo actually adds a real model call.
+- **`angular-crashCourse-tracker-app`** — **excluded from the site entirely**, per the explicit recommendation in `portfolio-overall-analysis.md`: it doesn't build, has no tests, and its advertised features (add/delete/reminder-toggle) are `console.log` stubs. Not referenced anywhere in `projects.data.ts`.
+- **Founders' `projectSlugs`** updated: Kunal now includes `donezo`; Mrityunjay now includes `ibkr-signal-scanner` and `flowmedic` (his resume had no personal-projects section, but these are real, verified personal repos — legitimate to add).
+- **Homepage featured work** (`featured: true`, max 3, shown on `/`) reordered/reassigned to match the analysis's own recommended strongest-projects order: `enterprise-micro-frontend-shell`, `employee-management-system`, `ibkr-signal-scanner`. `multi-tenant-hospital-management-system` was un-featured (still listed on `/work`, just not homepage-highlighted).
+- **`Project` model gained a new optional field**: `statusLabel?: string` (`src/app/core/models/project.model.ts`) — a short, honest badge like "Work in progress" / "Hackathon MVP" / "Actively used", rendered next to the ownership badge in `work-list.html`, `work-detail.html`, `founder.html`, and `featured-work.html`. Use this pattern for any future project that isn't a plain finished/shipped thing.
+- **`Button` component gained a new `external` input** (`shared/ui/button/button.ts`/`.html`) — when true on an `href`-based button, sets `target="_blank" rel="noopener noreferrer"`. Wired up on the Demo/GitHub buttons in `work-detail.html` so external links open in a new tab instead of navigating away from the site.
+- `public/sitemap.xml` updated with the three new project routes.
+
+### 4a. ⚠️ Needs your decision: `ibkr-webapp-main` has a committed secret
+
+The GitHub analysis (`ibkr-webapp-portfolio-analysis.md`) found a hardcoded `flask_secret_key` value committed in `config.ini` in `https://github.com/Mrityunjay1997/ibkr-webapp-main`, and explicitly recommends: *"Rotate the secret committed in `ibkr-webapp-main/config.ini` and move it to an environment variable before sharing that repository's link publicly."*
+
+Because of this, **the `ibkr-signal-scanner` project on the site intentionally has no `githubUrl` set** — the project's technical content is on the site, but it doesn't link out to the repo yet. Once the secret has been rotated (and ideally purged from git history, not just the latest commit), add `githubUrl: 'https://github.com/Mrityunjay1997/ibkr-webapp-main'` to that project in `projects.data.ts`. Don't add the link before that's done — don't assume it's been handled unless told so explicitly.
+
+## 5. Tech stack & key architectural decisions
 
 - **Angular 22**, standalone components, **zoneless** change detection (`provideZonelessChangeDetection()` in `app.config.ts` — there is no zone.js dependency in `package.json`, this is intentional, not an oversight).
-- **SSR + full prerendering** via `@angular/ssr`. `src/app/app.routes.server.ts` prerenders every route, including parameterized ones (`work/:slug`, `about/:slug`, `insights/:slug`) via `getPrerenderParams` reading the local data files.
+- **SSR + full prerendering** via `@angular/ssr`. `src/app/app.routes.server.ts` prerenders every route, including parameterized ones (`work/:slug`, `about/:slug`, `insights/:slug`) via `getPrerenderParams` reading the local data files. Currently prerenders 23 static routes.
 - **Tailwind CSS v4** (CSS-first `@theme` config, no `tailwind.config.js`). Design tokens: `src/styles/tokens.css`. Typography: `src/styles/typography.css`. Motion: `src/styles/animations.css` (respects `prefers-reduced-motion`).
 - **Signals** for component state; **typed Reactive Forms** for the Start a Project form.
 - **No NgRx, no CMS, no micro-frontends, no database.** Content is typed local data under `src/app/core/data/*.ts`. This was a deliberate constraint from the brief — don't add these without being asked.
 - **Vitest** for unit tests (`npm test`), **Playwright** for e2e (`npm run e2e`) — Playwright was added during this build; it wasn't in the original scaffold.
 - Package manager: npm. Node 22+ assumed (CI uses Node 22).
 
-## 4. What's built — pages & routes
+## 6. What's built — pages & routes
 
 All routes are lazy-loaded (`*.routes.ts` per feature) and prerendered.
 
 | Route | Component | Notes |
 |---|---|---|
 | `/` | `features/home/home.ts` | Composes 11 section components under `features/home/sections/*` (hero, credibility, services-overview, featured-work, philosophy, why-us, process, founders-preview, technology, insights-preview, final-cta) |
-| `/work` | `features/work/work-list` | Category filter (All/Product/Full Stack/Architecture/Cloud/AI), ownership badges |
+| `/work` | `features/work/work-list` | Category filter (All/Product/Full Stack/Architecture/Cloud/AI), ownership badges, status badges |
 | `/work/:slug` | `features/work/work-detail` | Full case-study layout; sections render conditionally based on what data exists |
 | `/services` | `features/services/services.ts` | 6 service sections with anchor IDs (`#product-engineering` etc.) for deep-linking from the homepage |
 | `/about` | `features/about/about.ts` | Story, philosophy, founder cards, combined capabilities, CTA |
 | `/about/kunal`, `/about/mrityunjay` | `features/about/founder/founder.ts` | Full founder profile (experience, projects, certifications, tech stack) |
 | `/insights` | `features/insights/insights-list` | 3 "Coming soon" placeholder articles |
 | `/insights/:slug` | `features/insights/insight-detail` | |
-| `/start-a-project` | `features/start-project/start-project.ts` | Typed reactive form, mock submission (see §6) |
+| `/start-a-project` | `features/start-project/start-project.ts` | Typed reactive form, mock submission (see §8) |
 | `/privacy`, `/terms` | `features/legal/*` | Concise placeholder legal copy, explicitly marked as pending real legal review |
 | `**` (404) | `features/not-found/not-found.ts` | |
 
@@ -62,12 +99,12 @@ Layout: `src/app/layout/header` (scroll-aware, accessible mobile menu with Escap
 
 Core services (`src/app/core/`):
 - `seo/seo.service.ts` + `seo/structured-data.ts` — per-route `<title>`/meta/canonical/OG tags + JSON-LD (Organization, WebSite, Person, Service, Article).
-- `services/contact.service.ts` — documents the intended backend API contract in comments; currently mock-only (see §6).
+- `services/contact.service.ts` — documents the intended backend API contract in comments; currently mock-only (see §8).
 - `services/analytics.service.ts` — vendor-agnostic `window.dataLayer` push, no-ops until `environment.analyticsId` is set.
 - `config/site.config.ts` — social links (all `null` placeholders), founder slugs.
 - `data/*.ts` — `PROJECTS`, `FOUNDERS`, `SERVICES`, `ARTICLES` typed content arrays. **This is where you edit content**, not in templates.
 
-## 5. Bugs found and fixed during this build (read before assuming something is broken again)
+## 7. Bugs found and fixed during the initial build (read before assuming something is broken again)
 
 These were real, reproduced-and-verified bugs, not stylistic choices — if something looks similar in future work, this is why:
 
@@ -81,37 +118,40 @@ These were real, reproduced-and-verified bugs, not stylistic choices — if some
    - `--color-muted-text` (`#71717A` from the original brand spec) measured 4.09:1 on background / 3.90:1 on surface — under AA. Lightened to `#8C8C94` (~5.9:1 / ~5.7:1). This is a deliberate, documented deviation from the literal spec hex value, justified by the spec's own mandatory WCAG AA requirement.
 7. **`security.allowedHosts: []`** in `angular.json` (Angular CLI's default scaffold value) rejects *every* request to the standalone SSR server (`dist/letusdeliver/server/server.mjs`) — this would have silently 400'd the site in production. Fixed: set to `["letusdeliver.com", "www.letusdeliver.com"]` for production, `["localhost"]` for the development build configuration. **If you ever test the built SSR server locally and get a mysterious 400 "Header host ... is not allowed", this is the setting to check.**
 
-## 6. Contact form / backend status
+**Recurring gotcha across both sessions:** a `fullPage` Playwright screenshot taken without first scrolling through the page will show most below-the-fold content as blank/missing. This is *not* a bug — it's the `appReveal` scroll-triggered animation directive (`shared/directives/reveal.ts`) never getting scrolled into view, so `IntersectionObserver` never fires and content stays at `opacity: 0`. Always scroll (or use `prefers-reduced-motion` emulation) before screenshotting for QA, or you'll chase a phantom bug.
+
+## 8. Contact form / backend status
 
 No backend exists in this repo. `src/app/core/services/contact.service.ts` has the full intended API contract documented in a comment (request shape, expected server pipeline: validation → sanitization → rate limiting → spam protection → notification → optional persistence).
 
 Current behavior: `environment.useMockContactApi` (in `src/environments/environment.ts` and `environment.production.ts`) is `true`, so submissions resolve via an in-memory mock after a simulated delay, clearly logged to console as `[contact] Using mock contact API — no backend is configured yet.` This is intentional so the form is demoable end-to-end, but it is **not a real production submission** — flip `useMockContactApi` to `false` once a real `contactEndpoint` backend exists.
 
-## 7. Testing status (all currently passing)
+## 9. Testing status (all currently passing)
 
 - **Unit tests** (Vitest, `npm test`): 10 tests across `app.spec.ts`, `header.spec.ts`, `work-list.spec.ts`, `start-project.spec.ts`, `contact.service.spec.ts`.
 - **E2E tests** (Playwright, `npm run e2e`): 13 tests in `e2e/` — `homepage.spec.ts`, `work.spec.ts`, `start-project.spec.ts`, `mobile-navigation.spec.ts`. Config: `playwright.config.ts` (auto-starts `ng serve` on port 4200 if not already running).
 - **Lint** (`npm run lint`): clean.
-- **Production build** (`npm run build`): clean, 20 static routes prerendered, ~93 kB initial transfer (well under budget).
-- Visual QA was done manually via Playwright screenshots at desktop (1440px) and mobile (390px) widths for every page, plus a manual reduced-motion emulation check.
+- **Production build** (`npm run build`): clean, 23 static routes prerendered, initial transfer well under budget.
+- Visual QA was done manually via Playwright screenshots at desktop (1440px) and mobile (390px) widths for every page (see the scroll-before-screenshot gotcha in §7), plus a manual reduced-motion emulation check.
 
 Run all four before considering any future change "done": `npm run lint && npm test -- --watch=false && npm run build && npm run e2e -- --project=chromium`.
 
-## 8. CI
+## 10. CI
 
 `.github/workflows/ci.yml` — install → lint → unit tests → build → Playwright e2e, on push/PR to `main`. **No deploy job yet** — no hosting target has been chosen.
 
-## 9. What's missing / explicit placeholders
+## 11. What's missing / explicit placeholders
 
 - **Social media URLs** — all `null` in `src/app/core/config/site.config.ts`. Footer shows platform names as inactive text until real URLs are supplied. Do not invent URLs.
 - **Insights articles** — 3 "Coming soon" placeholders in `src/app/core/data/articles.data.ts`, `placeholder: true`. No real articles written yet.
 - **Privacy/Terms pages** — concise placeholder legal copy with an explicit on-page disclaimer ("pending formal legal review"). Not real legal text.
-- **Contact backend** — see §6.
+- **Contact backend** — see §8.
 - **Deployment** — no hosting target chosen, no deploy step in CI, no real production domain live yet (production env config assumes `https://letusdeliver.com` / `https://api.letusdeliver.com`).
-- **`public/images/` and `public/icons/`** — empty directories, reserved for future real assets. There are currently **zero raster images anywhere in the site** (no `<img>` tags at all) — all visuals are SVG/CSS by design, since no real screenshots/photos/logos were supplied. Don't add stock photography or fabricated screenshots.
+- **Raster images** — real logo assets were added 2026-09-13 (see §13); everything else is still SVG/CSS by design, since no project screenshots/photos were supplied. Don't add stock photography or fabricated screenshots.
 - **LetUsDeliver-branded client work** — none exists yet; `/work` only shows personal projects and labeled prior-employment work.
+- **`ibkr-signal-scanner`'s GitHub link** — deliberately withheld pending secret rotation; see §4a.
 
-## 10. How to resume work
+## 12. How to resume work
 
 ```bash
 cd D:\Start-up\letusdeliver
@@ -120,9 +160,34 @@ npm start                  # dev server → http://localhost:4200
 ```
 
 Key places to make common changes:
-- **Add/edit a project, service, founder, or article**: `src/app/core/data/*.ts` — typed data only, don't hardcode content into templates.
-- **Change design tokens (colors/fonts)**: `src/styles/tokens.css` (`@theme` block) — re-check contrast ratios if you change any color (see §5.6 for the method: compute relative luminance per WCAG formula, ratio = (L1+0.05)/(L2+0.05), need ≥4.5 for normal text, ≥3 for large/UI).
+- **Add/edit a project, service, founder, or article**: `src/app/core/data/*.ts` — typed data only, don't hardcode content into templates. If adding a project sourced from a GitHub analysis, follow the `statusLabel` pattern in §4 and never call something "AI-powered" unless it genuinely calls a model.
+- **Change design tokens (colors/fonts)**: `src/styles/tokens.css` (`@theme` block) — re-check contrast ratios if you change any color (see §7.6 for the method: compute relative luminance per WCAG formula, ratio = (L1+0.05)/(L2+0.05), need ≥4.5 for normal text, ≥3 for large/UI).
 - **Add a new route**: create a `features/<name>/` folder with its own `*.routes.ts`, wire it into `src/app/app.routes.ts`, and if it has dynamic params, add prerender param generation in `src/app/app.routes.server.ts`.
 - **Real contact backend**: implement per the contract in `contact.service.ts`, then set `useMockContactApi: false` in both environment files and configure `contactEndpoint`.
+- **`ibkr-signal-scanner` GitHub link**: see §4a before adding it.
 
-Before declaring any future session's work "done," re-run the four checks in §7.
+Before declaring any future session's work "done," re-run the four checks in §9. If you push again, remember `origin` is already configured — plain `git push` works.
+
+## 13. Branding assets: logos & favicons (added 2026-09-13)
+
+The user dropped real logo/favicon source files into `public/favicon_io/` (a favicon-generator export) plus two raw WhatsApp-shared JPEGs of the actual letusDeliver logo. These were processed and wired up:
+
+- **Source images** (both had a flat white background, no transparency): one was the icon mark alone (the blue "b/D" play-button glyph), the other the full horizontal lockup (mark + "letusDeliver" wordmark + "Think. Build. Deliver." tagline, with dark-navy/gray text).
+- **Processed with Pillow** (`pip install pillow` into the system Python at `C:\Users\singh\AppData\Local\Programs\Python\Python312\python`; not otherwise a project dependency) — chroma-keyed near-white pixels to transparent, cropped to content bounding box:
+  - `public/images/logo-mark.png` — icon-only, transparent background. **This is the one actually used in the UI** (header + footer), since it reads cleanly on the site's dark background (`--color-background: #0a0a0b`).
+  - `public/images/logo-lockup.png` — full wordmark, transparent background. **Not used anywhere yet** — its baked-in text is dark navy/gray, which has poor contrast against this site's dark theme. It's only usable on a light background (e.g. a future light-mode surface, printed collateral, or a social/OG image where a light card is composited). Don't drop it into the current dark header/footer/nav — it'll be close to illegible.
+- **Favicons**: moved the generated set from `public/favicon_io/` up to `public/` root (`favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`, `site.webmanifest`), then deleted `public/favicon_io/` (source JPEGs + duplicate files) and the unused empty `public/icons/`. Fixed `site.webmanifest`'s `name`/`short_name` (were empty strings) to `"letusDeliver"` and its `theme_color`/`background_color` (were `#ffffff`) to match the real site background `#0a0a0b`. Wired the full favicon set into `src/index.html`'s `<head>` (previously only had the old plain `favicon.ico`).
+- **Header** (`src/app/layout/header/header.html`) and **footer** (`src/app/layout/footer/footer.html`): both now render `<img src="/images/logo-mark.png">` (28×28) next to the existing "letusdeliver" text, instead of text-only.
+- Note: `android-chrome-*.png` and `apple-touch-icon.png` in the generator's export are actually the *full lockup* squeezed into a square canvas (not a clean icon crop) — that's what the user's favicon generator produced from the source art. Left as-is since favicons don't need to be legible at 16–32px; revisit only if the user supplies a proper square icon-only export.
+- Verified after: `ng lint` clean, `ng build` clean (23 prerendered routes, confirmed `logo-mark.png` and the new favicon links appear in the prerendered HTML `<head>` and header/footer markup), and a Playwright screenshot of the running dev server confirming the mark renders with real transparency (no white box) in both header and footer.
+
+## 14. Founder profile photos (added 2026-09-13)
+
+The user dropped real headshots into `public/images/`: `Kunal_profile_image.png` (1.7MB, 1086×1448) and `Mrityunjay_profile_image.jpeg` (125KB, 1145×1374).
+
+- **Optimized for web** with Pillow (same Python install as §13): resized to 800px wide, re-encoded as JPEG quality 82 → `public/images/kunal-profile.jpg` (~86KB) and `public/images/mrityunjay-profile.jpg` (~78KB). The large raw originals were then deleted from `public/images/` — only the optimized versions are kept/served. If a higher-resolution source is ever needed again, it'll have to be re-supplied by the user (not recoverable from the repo).
+- **Model**: added `photoUrl?: string` to `Founder` (`src/app/core/models/founder.model.ts`) — optional, falls back to the existing initials-circle avatar if unset.
+- **Data**: `src/app/core/data/founders.data.ts` — `photoUrl: '/images/kunal-profile.jpg'` on Kunal, `/images/mrityunjay-profile.jpg` on Mrityunjay.
+- **Wired into 3 templates**, each with an `@if (founder.photoUrl) { <img> } @else { <initials-div> }` fallback pattern: `src/app/features/about/founder/founder.html` (profile hero, 64×64), `src/app/features/home/sections/founders-preview/founders-preview.html` (56×56), `src/app/features/about/about.html` (56×56 — this list previously had no avatar at all, just name/role/summary; added one for consistency with the other two founder listings).
+- **SEO**: `src/app/features/about/founder/founder.ts` now passes `image: siteConfig.siteUrl + founder.photoUrl` to `SeoService.update()`, so founder profile pages get a real `og:image`/`twitter:image` instead of none (previously omitted everywhere on principle — see the comment in `seo.service.ts` — because no real image asset existed; now one does, for these two routes only). `personSchema()` in `src/app/core/seo/structured-data.ts` also includes `image` when `photoUrl` is set.
+- Verified: `ng lint` clean, `ng test` 10/10 pass, `ng build` clean (23 routes), confirmed via `grep` on prerendered HTML that all 3 templates render the correct `<img>` for each founder and that `og:image` appears on `/about/kunal` and `/about/mrityunjay`. Playwright screenshots of the running dev server confirm the photos render correctly as circular avatars in all 4 places (both detail pages, the `/about` grid, and the homepage founders-preview section).

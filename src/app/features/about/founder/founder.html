@@ -4,9 +4,19 @@
       <a routerLink="/about" class="text-sm text-secondary-text hover:text-primary-text">← Back to about</a>
 
       <div appReveal class="mt-6 flex items-center gap-5">
-        <div class="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-elevated font-display text-2xl font-semibold text-accent-bright">
-          {{ founder.name.charAt(0) }}
-        </div>
+        @if (founder.photoUrl) {
+          <img
+            [src]="founder.photoUrl"
+            [alt]="founder.name"
+            width="160"
+            height="160"
+            class="h-40 w-40 flex-none rounded-full object-cover"
+          />
+        } @else {
+          <div class="flex h-40 w-40 flex-none items-center justify-center rounded-full bg-elevated font-display text-4xl font-semibold text-accent-bright">
+            {{ founder.name.charAt(0) }}
+          </div>
+        }
         <div>
           <h1 class="font-display text-2xl font-semibold text-primary-text sm:text-3xl">{{ founder.name }}</h1>
           <p class="mt-1 text-accent-bright">{{ founder.role }}</p>
@@ -58,9 +68,16 @@
                 [routerLink]="['/work', project!.slug]"
                 class="group rounded-xl border border-border bg-surface p-5 transition-colors hover:border-accent/50"
               >
-                <span class="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-text">
-                  {{ ownershipLabel(project!.ownershipType) }}
-                </span>
+                <div class="flex flex-wrap gap-1.5">
+                  @if (project!.statusLabel) {
+                    <span class="rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-bright">
+                      {{ project!.statusLabel }}
+                    </span>
+                  }
+                  <span class="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-text">
+                    {{ ownershipLabel(project!.ownershipType) }}
+                  </span>
+                </div>
                 <h3 class="mt-3 font-display text-base font-semibold text-primary-text">{{ project!.title }}</h3>
                 <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ project!.summary }}</p>
               </a>

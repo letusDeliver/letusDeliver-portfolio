@@ -5,6 +5,11 @@
 
       <div class="mt-6 flex flex-wrap items-center gap-3">
         <p class="text-xs font-semibold uppercase tracking-wider text-accent-bright">{{ project.category }}</p>
+        @if (project.statusLabel) {
+          <span class="rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-bright">
+            {{ project.statusLabel }}
+          </span>
+        }
         <span class="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-text">
           {{ ownershipLabel(project.ownershipType) }}
         </span>
@@ -28,10 +33,10 @@
       @if (project.demoUrl || project.githubUrl) {
         <div class="mt-8 flex flex-wrap gap-3">
           @if (project.demoUrl) {
-            <app-button [href]="project.demoUrl" (click)="onDemoClick()">View Demo →</app-button>
+            <app-button [href]="project.demoUrl" [external]="true" (click)="onDemoClick()">View Demo →</app-button>
           }
           @if (project.githubUrl) {
-            <app-button variant="secondary" [href]="project.githubUrl" (click)="onGithubClick()">View on GitHub</app-button>
+            <app-button variant="secondary" [href]="project.githubUrl" [external]="true" (click)="onGithubClick()">View on GitHub</app-button>
           }
         </div>
       }

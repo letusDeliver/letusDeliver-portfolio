@@ -19,6 +19,8 @@ export interface Project {
   ownershipType: OwnershipType;
   /** Human-readable context for professional-experience projects, e.g. employer name. Never implies a LetUsDeliver client relationship. */
   contextLabel?: string;
+  /** Short, honest status badge — e.g. "Work in progress", "Hackathon MVP", "Actively used". Omit for a project with nothing notable to flag. */
+  statusLabel?: string;
   demoUrl?: string;
   githubUrl?: string;
   overview?: string;

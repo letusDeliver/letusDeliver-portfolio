@@ -39,12 +39,19 @@
           <div class="flex flex-1 flex-col p-6">
             <div class="flex items-center justify-between gap-2">
               <p class="text-xs font-semibold uppercase tracking-wider text-accent-bright">{{ project.category }}</p>
-              <span
-                class="rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider"
-                [class]="project.ownershipType === 'letusdeliver' ? 'border-accent/40 text-accent-bright' : 'border-border text-muted-text'"
-              >
-                {{ ownershipLabel(project.ownershipType) }}
-              </span>
+              <div class="flex flex-wrap items-center justify-end gap-1.5">
+                @if (project.statusLabel) {
+                  <span class="rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-bright">
+                    {{ project.statusLabel }}
+                  </span>
+                }
+                <span
+                  class="rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider"
+                  [class]="project.ownershipType === 'letusdeliver' ? 'border-accent/40 text-accent-bright' : 'border-border text-muted-text'"
+                >
+                  {{ ownershipLabel(project.ownershipType) }}
+                </span>
+              </div>
             </div>
             <h3 class="mt-2 font-display text-lg font-semibold text-primary-text">{{ project.title }}</h3>
             <p class="mt-2 flex-1 text-sm leading-relaxed text-secondary-text">{{ project.summary }}</p>

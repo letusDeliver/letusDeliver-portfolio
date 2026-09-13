@@ -40,14 +40,31 @@
           appReveal
           [appRevealDelay]="i * 90"
           [routerLink]="['/about', founder.slug]"
-          class="group rounded-2xl border border-border bg-surface p-8 shadow-card transition-colors hover:border-accent/50"
+          class="group flex flex-col gap-5 rounded-2xl border border-border bg-surface p-8 shadow-card transition-colors hover:border-accent/50 sm:flex-row sm:items-start"
         >
-          <h3 class="font-display text-xl font-semibold text-primary-text">{{ founder.name }}</h3>
-          <p class="mt-1 text-sm font-medium text-accent-bright">{{ founder.role }}</p>
-          <p class="mt-4 text-sm leading-relaxed text-secondary-text">{{ founder.summary }}</p>
-          <span class="mt-5 inline-flex items-center text-sm font-medium text-primary-text opacity-0 transition-opacity group-hover:opacity-100">
-            Full profile →
-          </span>
+          <div class="flex-none">
+            @if (founder.photoUrl) {
+              <img
+                [src]="founder.photoUrl"
+                [alt]="founder.name"
+                width="144"
+                height="144"
+                class="h-36 w-36 rounded-full object-cover"
+              />
+            } @else {
+              <div class="flex h-36 w-36 items-center justify-center rounded-full bg-elevated font-display text-3xl font-semibold text-accent-bright">
+                {{ founder.name.charAt(0) }}
+              </div>
+            }
+          </div>
+          <div class="flex flex-col">
+            <h3 class="font-display text-xl font-semibold text-primary-text">{{ founder.name }}</h3>
+            <p class="mt-1 text-sm font-medium text-accent-bright">{{ founder.role }}</p>
+            <p class="mt-4 text-sm leading-relaxed text-secondary-text">{{ founder.summary }}</p>
+            <span class="mt-5 inline-flex items-center text-sm font-medium text-primary-text opacity-0 transition-opacity group-hover:opacity-100">
+              Full profile →
+            </span>
+          </div>
         </a>
       }
     </div>

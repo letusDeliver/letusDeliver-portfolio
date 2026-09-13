@@ -22,6 +22,8 @@ export class Button {
    */
   link = input<string | undefined>(undefined);
   href = input<string | undefined>(undefined);
+  /** Set for off-site `href` links (GitHub, live demos) so they open in a new tab. */
+  external = input(false);
   type = input<'button' | 'submit'>('button');
   disabled = input(false);
 

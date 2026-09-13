@@ -9,7 +9,12 @@
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </a>
 } @else if (href()) {
-  <a [href]="href()" [class]="baseClasses">
+  <a
+    [href]="href()"
+    [class]="baseClasses"
+    [target]="external() ? '_blank' : null"
+    [rel]="external() ? 'noopener noreferrer' : null"
+  >
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </a>
 } @else {
