@@ -37,3 +37,16 @@ body {
 .skip-link:focus {
   left: 0;
 }
+
+/*
+ * Tailwind has no utility for SVG `stop-color` (only fill/stroke), so the
+ * hero pipeline diagram's gradient stops use these instead of an inline
+ * `style="stop-color: var(...)"` attribute.
+ */
+.stop-color-accent {
+  stop-color: var(--color-accent);
+}
+
+.stop-color-accent-bright {
+  stop-color: var(--color-accent-bright);
+}
