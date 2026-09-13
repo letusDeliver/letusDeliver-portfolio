@@ -1,0 +1,64 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page">
+    <app-section-heading
+      eyebrow="Work"
+      heading="What we've built."
+      description="Real applications and engineering projects showcasing how we approach software."
+    />
+
+    <div class="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
+      @for (filter of filters; track filter) {
+        <button
+          type="button"
+          (click)="setFilter(filter)"
+          [attr.aria-pressed]="activeFilter() === filter"
+          class="rounded-full border px-4 py-2 text-sm font-medium transition-colors"
+          [class]="
+            activeFilter() === filter
+              ? 'border-accent bg-accent/10 text-accent-bright'
+              : 'border-border text-secondary-text hover:text-primary-text'
+          "
+        >
+          {{ filter }}
+        </button>
+      }
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (project of filteredProjects(); track project.slug; let i = $index) {
+        <a
+          appReveal
+          [appRevealDelay]="(i % 3) * 70"
+          [routerLink]="['/work', project.slug]"
+          class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-colors hover:border-accent/50"
+        >
+          <div class="relative flex h-32 items-center justify-center overflow-hidden bg-elevated" aria-hidden="true">
+            <div class="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent"></div>
+          </div>
+
+          <div class="flex flex-1 flex-col p-6">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-xs font-semibold uppercase tracking-wider text-accent-bright">{{ project.category }}</p>
+              <span
+                class="rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider"
+                [class]="project.ownershipType === 'letusdeliver' ? 'border-accent/40 text-accent-bright' : 'border-border text-muted-text'"
+              >
+                {{ ownershipLabel(project.ownershipType) }}
+              </span>
+            </div>
+            <h3 class="mt-2 font-display text-lg font-semibold text-primary-text">{{ project.title }}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-secondary-text">{{ project.summary }}</p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              @for (tech of project.technologies.slice(0, 3); track tech) {
+                <app-tag>{{ tech }}</app-tag>
+              }
+            </div>
+          </div>
+        </a>
+      } @empty {
+        <p class="col-span-full text-sm text-secondary-text">No projects in this category yet.</p>
+      }
+    </div>
+  </div>
+</section>

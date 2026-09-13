@@ -1,0 +1,11 @@
+<div class="max-w-2xl" [class.mx-auto]="align() === 'center'" [class.text-center]="align() === 'center'">
+  @if (eyebrow()) {
+    <p class="font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent-bright mb-3">
+      {{ eyebrow() }}
+    </p>
+  }
+  <h2 class="text-fluid-h2 font-display font-semibold text-primary-text">{{ heading() }}</h2>
+  @if (description()) {
+    <p class="mt-4 text-secondary-text text-base sm:text-lg leading-relaxed">{{ description() }}</p>
+  }
+</div>

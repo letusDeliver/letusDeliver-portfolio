@@ -1,0 +1,70 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page max-w-3xl">
+    <app-section-heading
+      eyebrow="Services"
+      heading="Engineering capability for every stage of your product."
+      description="Six areas of engineering capability, applied together or independently depending on what your product needs right now."
+    />
+  </div>
+</section>
+
+<div class="divide-y divide-border border-t border-border">
+  @for (service of services; track service.slug; let i = $index) {
+    <section [id]="service.slug" class="scroll-mt-24 py-16 sm:py-20">
+      <div class="container-page grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+        <div appReveal>
+          <p class="font-display text-xs font-semibold uppercase tracking-wider text-muted-text">0{{ i + 1 }}</p>
+          <h2 class="mt-3 font-display text-2xl font-semibold text-primary-text sm:text-3xl">{{ service.title }}</h2>
+          <p class="mt-2 text-accent-bright">{{ service.tagline }}</p>
+          <p class="mt-4 leading-relaxed text-secondary-text">{{ service.description }}</p>
+
+          <div class="mt-6 rounded-xl border border-border bg-surface p-4">
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-text">The problem</p>
+            <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ service.problem }}</p>
+          </div>
+
+          <div class="mt-8">
+            <app-button link="/start-a-project" variant="secondary">Start a Project →</app-button>
+          </div>
+        </div>
+
+        <div appReveal [appRevealDelay]="90" class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">What we do</h3>
+            <ul class="mt-3 space-y-2">
+              @for (item of service.whatWeDo; track item) {
+                <li class="flex gap-3 text-sm text-secondary-text">
+                  <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-accent-bright"></span>
+                  <span>{{ item }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">Capabilities</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              @for (item of service.capabilities; track item) {
+                <app-tag tone="accent">{{ item }}</app-tag>
+              }
+            </div>
+
+            <h3 class="mt-6 text-xs font-semibold uppercase tracking-wider text-muted-text">Typical use cases</h3>
+            <ul class="mt-3 space-y-2">
+              @for (item of service.useCases; track item) {
+                <li class="text-sm text-secondary-text">{{ item }}</li>
+              }
+            </ul>
+
+            <h3 class="mt-6 text-xs font-semibold uppercase tracking-wider text-muted-text">Technologies</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              @for (item of service.technologies; track item) {
+                <app-tag>{{ item }}</app-tag>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+</div>

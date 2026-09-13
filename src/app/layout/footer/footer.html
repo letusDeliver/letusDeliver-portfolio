@@ -1,0 +1,48 @@
+<footer class="border-t border-border bg-surface">
+  <div class="container-page py-14">
+    <div class="grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
+      <div>
+        <p class="font-display text-lg font-semibold text-primary-text">letusdeliver</p>
+        <p class="mt-2 text-sm text-secondary-text">{{ tagline }}</p>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">Site</h3>
+        <ul class="mt-4 space-y-3">
+          @for (link of links; track link.path) {
+            <li>
+              <a [routerLink]="link.path" class="text-sm text-secondary-text hover:text-primary-text transition-colors">
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">Elsewhere</h3>
+        <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-3 md:flex-col">
+          @for (item of socialLinks; track item.key) {
+            <li>
+              @if (social[item.key]) {
+                <a [href]="social[item.key]" class="text-sm text-secondary-text hover:text-primary-text transition-colors" rel="noopener noreferrer" target="_blank">
+                  {{ item.label }}
+                </a>
+              } @else {
+                <span class="text-sm text-muted-text" title="Coming soon">{{ item.label }}</span>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-xs text-muted-text">© {{ year }} letusdeliver</p>
+      <div class="flex gap-6">
+        <a routerLink="/privacy" class="text-xs text-muted-text hover:text-secondary-text transition-colors">Privacy</a>
+        <a routerLink="/terms" class="text-xs text-muted-text hover:text-secondary-text transition-colors">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>

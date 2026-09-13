@@ -1,0 +1,27 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page">
+    <app-section-heading
+      eyebrow="What we do"
+      heading="Software built for real-world problems."
+      description="From new products to complex business systems, we help turn ideas and engineering challenges into reliable software."
+    />
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      @for (service of services; track service.slug; let i = $index) {
+        <a
+          appReveal
+          [appRevealDelay]="i * 60"
+          [routerLink]="['/services']"
+          [fragment]="service.slug"
+          class="group rounded-2xl border border-border bg-surface p-6 shadow-card transition-colors hover:border-accent/50"
+        >
+          <h3 class="font-display text-lg font-semibold text-primary-text">{{ service.title }}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ service.tagline }}</p>
+          <span class="mt-4 inline-flex items-center text-sm font-medium text-accent-bright opacity-0 transition-opacity group-hover:opacity-100">
+            Learn more →
+          </span>
+        </a>
+      }
+    </div>
+  </div>
+</section>

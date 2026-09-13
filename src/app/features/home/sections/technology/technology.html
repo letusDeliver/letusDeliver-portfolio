@@ -1,0 +1,18 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page">
+    <app-section-heading eyebrow="Toolkit" heading="Our engineering toolkit." />
+
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      @for (group of groups; track group.category; let i = $index) {
+        <div appReveal [appRevealDelay]="i * 60" class="rounded-2xl border border-border bg-surface p-6">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">{{ group.category }}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            @for (item of group.items; track item) {
+              <li class="rounded-full border border-border bg-elevated px-3 py-1 text-xs text-secondary-text">{{ item }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

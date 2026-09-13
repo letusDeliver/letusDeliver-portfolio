@@ -1,0 +1,10 @@
+<section class="border-y border-border bg-surface">
+  <div class="container-page grid grid-cols-2 gap-8 py-14 sm:grid-cols-4 sm:gap-6">
+    @for (stat of stats; track stat.line1; let i = $index) {
+      <div appReveal [appRevealDelay]="i * 80" class="text-center sm:text-left">
+        <p class="font-display text-xl font-semibold text-primary-text sm:text-2xl">{{ stat.line1 }}</p>
+        <p class="text-xs font-medium uppercase tracking-wider text-muted-text sm:text-sm">{{ stat.line2 }}</p>
+      </div>
+    }
+  </div>
+</section>

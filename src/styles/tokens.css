@@ -1,0 +1,31 @@
+/**
+ * Design tokens — single source of truth for color, radius and shadow
+ * primitives. Tailwind v4 reads `@theme` and generates utilities
+ * (bg-background, text-primary-text, etc.) plus CSS custom properties.
+ */
+@theme {
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #0a0a0b;
+  --color-surface: #111113;
+  --color-elevated: #18181b;
+  --color-border: #27272a;
+
+  --color-primary-text: #f5f5f5;
+  --color-secondary-text: #a1a1aa;
+  /*
+   * The brand spec's literal muted-text value (#71717A) measures ~4.09:1
+   * against the page background and ~3.90:1 against surface — short of
+   * WCAG AA's 4.5:1 for normal-size text. Lightened slightly to #8C8C94
+   * (~5.9:1 / ~5.7:1) to stay accessible while keeping the same muted
+   * role in the hierarchy.
+   */
+  --color-muted-text: #8c8c94;
+
+  --color-accent: #8b5cf6;
+  --color-accent-bright: #a78bfa;
+
+  --shadow-glow: 0 0 60px -15px rgba(139, 92, 246, 0.35);
+  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.03) inset, 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+}

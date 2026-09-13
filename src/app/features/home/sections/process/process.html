@@ -1,0 +1,20 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page">
+    <app-section-heading eyebrow="How we work" heading="From idea to production." align="center" />
+
+    <div class="relative mx-auto mt-16 max-w-5xl">
+      <div class="absolute left-1/2 top-6 hidden h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent sm:block"></div>
+
+      <div class="grid gap-10 sm:grid-cols-3 lg:grid-cols-6">
+        @for (stage of stages; track stage.index; let i = $index) {
+          <div appReveal [appRevealDelay]="i * 90" class="relative flex flex-col items-center text-center sm:items-start sm:text-left">
+            <div class="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-accent/50 bg-surface font-display text-sm font-semibold text-accent-bright">
+              {{ stage.index }}
+            </div>
+            <p class="mt-4 font-display text-base font-semibold text-primary-text">{{ stage.label }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

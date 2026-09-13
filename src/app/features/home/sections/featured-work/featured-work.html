@@ -1,0 +1,48 @@
+<section id="featured-work" class="border-t border-border bg-surface/40 py-20 sm:py-28">
+  <div class="container-page">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <app-section-heading
+        eyebrow="Selected work"
+        heading="What we've built."
+        description="A selection of products and engineering projects showcasing how we approach software."
+      />
+      <app-button variant="secondary" link="/work">View all work →</app-button>
+    </div>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-3">
+      @for (project of projects; track project.slug; let i = $index) {
+        <a
+          appReveal
+          [appRevealDelay]="i * 80"
+          [routerLink]="['/work', project.slug]"
+          class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-colors hover:border-accent/50"
+        >
+          <div class="relative flex h-40 items-center justify-center overflow-hidden bg-elevated" aria-hidden="true">
+            <div class="absolute inset-0 bg-gradient-to-br from-accent/25 via-transparent to-transparent"></div>
+            <div class="grid grid-cols-6 gap-2 opacity-40">
+              @for (dot of [1,2,3,4,5,6,7,8,9,10,11,12]; track dot) {
+                <span class="h-1.5 w-1.5 rounded-full bg-accent-bright"></span>
+              }
+            </div>
+          </div>
+
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-xs font-semibold uppercase tracking-wider text-accent-bright">{{ project.category }}</p>
+            <h3 class="mt-2 font-display text-lg font-semibold text-primary-text">{{ project.title }}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-secondary-text">{{ project.summary }}</p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              @for (tech of project.technologies.slice(0, 3); track tech) {
+                <app-tag>{{ tech }}</app-tag>
+              }
+            </div>
+
+            <span class="mt-5 inline-flex items-center text-sm font-medium text-accent-bright">
+              View Project →
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+<section class="relative overflow-hidden">
+  <div
+    class="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container-page relative grid gap-16 py-20 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-32">
+    <div appReveal>
+      <p class="font-display text-xs font-semibold uppercase tracking-[0.25em] text-accent-bright">
+        Software Engineering · Cloud · AI
+      </p>
+
+      <h1 class="mt-6 text-fluid-hero font-display font-semibold text-primary-text">
+        Think. Build.
+        <span class="text-accent-bright">Deliver.</span>
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-secondary-text sm:text-xl">
+        We design, build and scale modern digital products for startups and growing businesses.
+      </p>
+
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <app-button link="/start-a-project" size="lg" (click)="onStartProjectClick()">
+          Start a Project →
+        </app-button>
+        <app-button variant="secondary" size="lg" href="#featured-work">
+          Explore Our Work ↓
+        </app-button>
+      </div>
+    </div>
+
+    <div appReveal [appRevealDelay]="150" class="relative mx-auto w-full max-w-sm lg:max-w-none">
+      <svg viewBox="0 0 320 560" class="w-full" role="img" aria-label="Software delivery pipeline: product, frontend, API, database, cloud, deliver">
+        <defs>
+          <linearGradient id="nodeGlow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#a78bfa" />
+            <stop offset="100%" stop-color="#8b5cf6" />
+          </linearGradient>
+        </defs>
+
+        <line x1="60" y1="40" x2="60" y2="520" stroke="#27272a" stroke-width="2" />
+        <line x1="60" y1="40" x2="60" y2="520" stroke="url(#nodeGlow)" stroke-width="2" class="path-flow" opacity="0.7" />
+
+        @for (stage of stages; track stage; let i = $index) {
+          <g [attr.transform]="'translate(0,' + (40 + i * 96) + ')'">
+            <circle cx="60" cy="0" r="9" fill="#111113" stroke="url(#nodeGlow)" stroke-width="2.5" class="node-pulse" [style.animation-delay.ms]="i * 220" />
+            <circle cx="60" cy="0" r="3" fill="#a78bfa" />
+            <text x="90" y="6" fill="#f5f5f5" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="600">
+              {{ stage }}
+            </text>
+          </g>
+        }
+      </svg>
+    </div>
+  </div>
+</section>

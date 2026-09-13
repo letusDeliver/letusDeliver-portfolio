@@ -1,0 +1,116 @@
+@if (founder(); as founder) {
+  <article class="py-16 sm:py-24">
+    <div class="container-page max-w-3xl">
+      <a routerLink="/about" class="text-sm text-secondary-text hover:text-primary-text">← Back to about</a>
+
+      <div appReveal class="mt-6 flex items-center gap-5">
+        <div class="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-elevated font-display text-2xl font-semibold text-accent-bright">
+          {{ founder.name.charAt(0) }}
+        </div>
+        <div>
+          <h1 class="font-display text-2xl font-semibold text-primary-text sm:text-3xl">{{ founder.name }}</h1>
+          <p class="mt-1 text-accent-bright">{{ founder.role }}</p>
+        </div>
+      </div>
+
+      <p class="mt-8 text-lg leading-relaxed text-secondary-text">{{ founder.summary }}</p>
+
+      <section class="mt-12">
+        <h2 class="font-display text-lg font-semibold text-primary-text">Core expertise</h2>
+        <div class="mt-4 flex flex-wrap gap-2">
+          @for (item of founder.expertise; track item) {
+            <app-tag tone="accent">{{ item }}</app-tag>
+          }
+        </div>
+      </section>
+
+      <section class="mt-12">
+        <h2 class="font-display text-lg font-semibold text-primary-text">Engineering philosophy</h2>
+        <p class="mt-4 leading-relaxed text-secondary-text">{{ founder.philosophy }}</p>
+      </section>
+
+      <section class="mt-12">
+        <h2 class="font-display text-lg font-semibold text-primary-text">Professional experience</h2>
+        <div class="mt-6 space-y-8">
+          @for (job of founder.experience; track job.organization) {
+            <div class="border-l-2 border-border pl-6">
+              <p class="text-sm text-muted-text">{{ job.period }}</p>
+              <h3 class="mt-1 font-display text-base font-semibold text-primary-text">{{ job.role }} · {{ job.organization }}</h3>
+              <ul class="mt-3 space-y-2">
+                @for (highlight of job.highlights; track highlight) {
+                  <li class="flex gap-3 text-sm text-secondary-text">
+                    <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-accent-bright"></span>
+                    <span>{{ highlight }}</span>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </section>
+
+      @if (projects().length) {
+        <section class="mt-12">
+          <h2 class="font-display text-lg font-semibold text-primary-text">Selected work</h2>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            @for (project of projects(); track project!.slug) {
+              <a
+                [routerLink]="['/work', project!.slug]"
+                class="group rounded-xl border border-border bg-surface p-5 transition-colors hover:border-accent/50"
+              >
+                <span class="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-text">
+                  {{ ownershipLabel(project!.ownershipType) }}
+                </span>
+                <h3 class="mt-3 font-display text-base font-semibold text-primary-text">{{ project!.title }}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ project!.summary }}</p>
+              </a>
+            }
+          </div>
+        </section>
+      }
+
+      <section class="mt-12">
+        <h2 class="font-display text-lg font-semibold text-primary-text">Certifications</h2>
+        <ul class="mt-4 space-y-2">
+          @for (cert of founder.certifications; track cert.name) {
+            <li class="text-sm text-secondary-text">
+              <span class="text-primary-text">{{ cert.name }}</span> — {{ cert.issuer }} · {{ cert.date }}
+            </li>
+          }
+        </ul>
+        <p class="mt-6 text-sm text-secondary-text">
+          <span class="text-primary-text">Education:</span> {{ founder.education.degree }}, {{ founder.education.institution }} · {{ founder.education.year }}
+        </p>
+      </section>
+
+      <section class="mt-12">
+        <h2 class="font-display text-lg font-semibold text-primary-text">Technical stack</h2>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2">
+          @for (group of founder.technologies; track group.category) {
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">{{ group.category }}</h3>
+              <div class="mt-3 flex flex-wrap gap-2">
+                @for (item of group.items; track item) {
+                  <app-tag>{{ item }}</app-tag>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="mt-16 rounded-2xl border border-border bg-surface p-8 text-center">
+        <h2 class="font-display text-xl font-semibold text-primary-text">Want to work with {{ founder.name }}?</h2>
+        <p class="mt-2 text-secondary-text">Tell us what you're building — {{ founder.name }} and the team will get back to you.</p>
+        <div class="mt-6 flex justify-center">
+          <app-button link="/start-a-project">Start a Project →</app-button>
+        </div>
+      </section>
+    </div>
+  </article>
+} @else {
+  <div class="container-page py-24 text-center">
+    <h1 class="font-display text-2xl font-semibold text-primary-text">Founder not found</h1>
+    <a routerLink="/about" class="mt-6 inline-block text-accent-bright">← Back to about</a>
+  </div>
+}

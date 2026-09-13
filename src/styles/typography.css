@@ -1,0 +1,45 @@
+/* Base typography — fluid sizes so hero copy never forces overflow on small screens. */
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-primary-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.text-fluid-hero {
+  font-size: clamp(2.5rem, 5vw + 1rem, 6rem);
+}
+
+.text-fluid-display {
+  font-size: clamp(2rem, 3vw + 1rem, 3.5rem);
+}
+
+.text-fluid-h2 {
+  font-size: clamp(1.75rem, 2vw + 1rem, 2.75rem);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-bright);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

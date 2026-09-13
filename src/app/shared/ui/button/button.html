@@ -1,0 +1,19 @@
+@let baseClasses = 'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none ' + classesByVariant[variant()] + ' ' + classesBySize[size()];
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
+
+@if (link()) {
+  <a [routerLink]="link()" [class]="baseClasses">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </a>
+} @else if (href()) {
+  <a [href]="href()" [class]="baseClasses">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </a>
+} @else {
+  <button [type]="type()" [disabled]="disabled()" [class]="baseClasses">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </button>
+}

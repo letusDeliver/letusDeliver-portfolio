@@ -1,0 +1,113 @@
+@if (project(); as project) {
+  <article class="py-16 sm:py-24">
+    <div class="container-page max-w-3xl">
+      <a routerLink="/work" class="text-sm text-secondary-text hover:text-primary-text">← Back to work</a>
+
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent-bright">{{ project.category }}</p>
+        <span class="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-text">
+          {{ ownershipLabel(project.ownershipType) }}
+        </span>
+      </div>
+
+      <h1 class="mt-4 text-fluid-display font-display font-semibold text-primary-text">{{ project.title }}</h1>
+      <p class="mt-4 text-lg leading-relaxed text-secondary-text">{{ project.summary }}</p>
+
+      @if (project.contextLabel) {
+        <p class="mt-4 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-muted-text">
+          {{ project.contextLabel }}. Shown here as evidence of engineering capability — not a letusdeliver client engagement.
+        </p>
+      }
+
+      <div class="mt-6 flex flex-wrap gap-2">
+        @for (tech of project.technologies; track tech) {
+          <app-tag>{{ tech }}</app-tag>
+        }
+      </div>
+
+      @if (project.demoUrl || project.githubUrl) {
+        <div class="mt-8 flex flex-wrap gap-3">
+          @if (project.demoUrl) {
+            <app-button [href]="project.demoUrl" (click)="onDemoClick()">View Demo →</app-button>
+          }
+          @if (project.githubUrl) {
+            <app-button variant="secondary" [href]="project.githubUrl" (click)="onGithubClick()">View on GitHub</app-button>
+          }
+        </div>
+      }
+
+      <div class="mt-14 space-y-12 border-t border-border pt-12">
+        @if (project.overview) {
+          <section>
+            <h2 class="font-display text-xl font-semibold text-primary-text">Overview</h2>
+            <p class="mt-3 leading-relaxed text-secondary-text">{{ project.overview }}</p>
+          </section>
+        }
+
+        @if (project.challenge) {
+          <section>
+            <h2 class="font-display text-xl font-semibold text-primary-text">Challenge</h2>
+            <p class="mt-3 leading-relaxed text-secondary-text">{{ project.challenge }}</p>
+          </section>
+        }
+
+        @if (project.solution) {
+          <section>
+            <h2 class="font-display text-xl font-semibold text-primary-text">Solution</h2>
+            <p class="mt-3 leading-relaxed text-secondary-text">{{ project.solution }}</p>
+          </section>
+        }
+
+        @if (project.features?.length) {
+          <section>
+            <h2 class="font-display text-xl font-semibold text-primary-text">Features</h2>
+            <ul class="mt-3 space-y-2">
+              @for (feature of project.features; track feature) {
+                <li class="flex gap-3 text-secondary-text">
+                  <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-accent-bright"></span>
+                  <span>{{ feature }}</span>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        @if (project.architectureNotes) {
+          <section>
+            <h2 class="font-display text-xl font-semibold text-primary-text">Architecture</h2>
+            <p class="mt-3 leading-relaxed text-secondary-text">{{ project.architectureNotes }}</p>
+          </section>
+        }
+
+        @if (project.engineeringDecisions?.length) {
+          <section>
+            <h2 class="font-display text-xl font-semibold text-primary-text">Engineering Decisions</h2>
+            <ul class="mt-3 space-y-2">
+              @for (decision of project.engineeringDecisions; track decision) {
+                <li class="flex gap-3 text-secondary-text">
+                  <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-accent-bright"></span>
+                  <span>{{ decision }}</span>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+      </div>
+
+      @if (nextProject(); as next) {
+        <div class="mt-16 border-t border-border pt-8">
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-text">Next project</p>
+          <a [routerLink]="['/work', next.slug]" class="mt-2 inline-flex items-center font-display text-lg font-semibold text-primary-text hover:text-accent-bright">
+            {{ next.title }} →
+          </a>
+        </div>
+      }
+    </div>
+  </article>
+} @else {
+  <div class="container-page py-24 text-center">
+    <h1 class="font-display text-2xl font-semibold text-primary-text">Project not found</h1>
+    <p class="mt-3 text-secondary-text">This project may have moved.</p>
+    <a routerLink="/work" class="mt-6 inline-block text-accent-bright">← Back to work</a>
+  </div>
+}

@@ -1,0 +1,64 @@
+/* Shared motion primitives. Every animated utility here is neutralized
+   under prefers-reduced-motion so decorative motion never overrides
+   user preference. */
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes path-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal-in {
+  animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.node-pulse {
+  animation: node-pulse 3.2s ease-in-out infinite;
+}
+
+.path-flow {
+  stroke-dasharray: 6 6;
+  animation: path-flow 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+  }
+
+  .path-flow {
+    animation: none;
+  }
+}

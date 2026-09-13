@@ -1,0 +1,149 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page max-w-2xl">
+    <app-section-heading
+      eyebrow="Start a project"
+      heading="Let's build something."
+      description="Tell us what you're building, and we'll get back to you with the next steps."
+    />
+
+    @if (submitted()) {
+      <div class="mt-12 rounded-2xl border border-accent/40 bg-accent/10 p-8 text-center" role="status">
+        <h2 class="font-display text-xl font-semibold text-primary-text">Message delivered.</h2>
+        <p class="mt-2 text-secondary-text">Thanks for reaching out. We'll review your project and get back to you soon.</p>
+      </div>
+    } @else {
+      <form class="mt-12 space-y-6" novalidate onsubmit="return false" (ngSubmit)="submit()" [formGroup]="form">
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="name" class="text-sm font-medium text-primary-text">Name <span aria-hidden="true">*</span></label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              (blur)="onFieldTouched()"
+              [attr.aria-invalid]="isInvalid('name')"
+              aria-describedby="name-error"
+              class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
+            />
+            @if (isInvalid('name')) {
+              <p id="name-error" class="mt-1 text-xs text-red-400">Please enter your name.</p>
+            }
+          </div>
+
+          <div>
+            <label for="email" class="text-sm font-medium text-primary-text">Email <span aria-hidden="true">*</span></label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              (blur)="onFieldTouched()"
+              [attr.aria-invalid]="isInvalid('email')"
+              aria-describedby="email-error"
+              class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
+            />
+            @if (isInvalid('email')) {
+              <p id="email-error" class="mt-1 text-xs text-red-400">Please enter a valid email address.</p>
+            }
+          </div>
+        </div>
+
+        <div>
+          <label for="company" class="text-sm font-medium text-primary-text">Company</label>
+          <input
+            id="company"
+            type="text"
+            formControlName="company"
+            class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
+          />
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="projectType" class="text-sm font-medium text-primary-text">Project type <span aria-hidden="true">*</span></label>
+            <select
+              id="projectType"
+              formControlName="projectType"
+              (blur)="onFieldTouched()"
+              [attr.aria-invalid]="isInvalid('projectType')"
+              aria-describedby="projectType-error"
+              class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text focus-visible:border-accent"
+            >
+              <option value="" disabled>Select a project type</option>
+              @for (type of projectTypes; track type) {
+                <option [value]="type">{{ type }}</option>
+              }
+            </select>
+            @if (isInvalid('projectType')) {
+              <p id="projectType-error" class="mt-1 text-xs text-red-400">Please select a project type.</p>
+            }
+          </div>
+
+          <div>
+            <label for="timeline" class="text-sm font-medium text-primary-text">Timeline <span aria-hidden="true">*</span></label>
+            <select
+              id="timeline"
+              formControlName="timeline"
+              (blur)="onFieldTouched()"
+              [attr.aria-invalid]="isInvalid('timeline')"
+              aria-describedby="timeline-error"
+              class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text focus-visible:border-accent"
+            >
+              <option value="" disabled>Select a timeline</option>
+              @for (timeline of timelines; track timeline) {
+                <option [value]="timeline">{{ timeline }}</option>
+              }
+            </select>
+            @if (isInvalid('timeline')) {
+              <p id="timeline-error" class="mt-1 text-xs text-red-400">Please select a timeline.</p>
+            }
+          </div>
+        </div>
+
+        <div>
+          <label for="projectDescription" class="text-sm font-medium text-primary-text">Project description <span aria-hidden="true">*</span></label>
+          <textarea
+            id="projectDescription"
+            rows="5"
+            formControlName="projectDescription"
+            (blur)="onFieldTouched()"
+            [attr.aria-invalid]="isInvalid('projectDescription')"
+            aria-describedby="projectDescription-error"
+            class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
+          ></textarea>
+          @if (isInvalid('projectDescription')) {
+            <p id="projectDescription-error" class="mt-1 text-xs text-red-400">Tell us a bit more — at least 20 characters.</p>
+          }
+        </div>
+
+        <div>
+          <label for="budget" class="text-sm font-medium text-primary-text">Budget</label>
+          <input
+            id="budget"
+            type="text"
+            formControlName="budget"
+            placeholder="e.g. $5k–$15k, or flexible"
+            class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
+          />
+        </div>
+
+        <div>
+          <label for="attachment" class="text-sm font-medium text-primary-text">Attachment (optional)</label>
+          <input
+            id="attachment"
+            type="file"
+            (change)="onFileSelected($event)"
+            class="mt-2 w-full text-sm text-secondary-text file:mr-4 file:rounded-full file:border-0 file:bg-elevated file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary-text"
+          />
+        </div>
+
+        @if (errorMessage()) {
+          <p class="text-sm text-red-400" role="alert">{{ errorMessage() }}</p>
+        }
+
+        <app-button type="submit" size="lg" [disabled]="submitting()">
+          {{ submitting() ? 'Sending…' : 'Start the Conversation →' }}
+        </app-button>
+      </form>
+    }
+  </div>
+</section>

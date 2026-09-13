@@ -1,0 +1,77 @@
+<header
+  class="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
+  [class]="scrolled() ? 'bg-background/80 backdrop-blur-md border-b border-border' : 'bg-transparent border-b border-transparent'"
+>
+  <div class="container-page flex h-16 items-center justify-between sm:h-20">
+    <a
+      routerLink="/"
+      (click)="closeMenu()"
+      class="font-display text-lg font-semibold tracking-tight text-primary-text focus-visible:outline-2"
+      aria-label="letusdeliver — home"
+    >
+      letusdeliver
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-8">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="text-primary-text"
+          class="text-sm font-medium text-secondary-text hover:text-primary-text transition-colors"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="hidden md:block">
+      <app-button link="/start-a-project" size="md" (click)="onStartProjectClick()">
+        Start a Project →
+      </app-button>
+    </div>
+
+    <button
+      type="button"
+      class="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-primary-text"
+      [attr.aria-expanded]="mobileMenuOpen()"
+      aria-controls="mobile-nav-panel"
+      [attr.aria-label]="mobileMenuOpen() ? 'Close menu' : 'Open menu'"
+      (click)="toggleMenu()"
+    >
+      @if (!mobileMenuOpen()) {
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+        </svg>
+      } @else {
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+        </svg>
+      }
+    </button>
+  </div>
+
+  @if (mobileMenuOpen()) {
+    <div
+      id="mobile-nav-panel"
+      class="md:hidden border-t border-border bg-background px-5 pb-6 pt-2"
+    >
+      <nav aria-label="Mobile primary" class="flex flex-col gap-1">
+        @for (link of links; track link.path) {
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="text-primary-text bg-elevated"
+            (click)="closeMenu()"
+            class="rounded-lg px-3 py-3 text-base font-medium text-secondary-text hover:text-primary-text hover:bg-elevated transition-colors"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </nav>
+      <div class="mt-4">
+        <app-button link="/start-a-project" size="lg" (click)="onStartProjectClick(); closeMenu()">
+          Start a Project →
+        </app-button>
+      </div>
+    </div>
+  }
+</header>

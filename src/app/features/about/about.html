@@ -1,0 +1,80 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page max-w-3xl">
+    <app-section-heading
+      eyebrow="About"
+      heading="Small by design. Serious about engineering."
+      description="letusdeliver is a founder-led software engineering studio — not a large outsourcing shop, and not trying to be one."
+    />
+  </div>
+</section>
+
+<section class="border-t border-border py-16 sm:py-20">
+  <div class="container-page grid gap-10 lg:grid-cols-2">
+    <div appReveal>
+      <h2 class="font-display text-xl font-semibold text-primary-text">Our story</h2>
+      <p class="mt-4 leading-relaxed text-secondary-text">
+        letusdeliver was founded by Kunal and Mrityunjay — two engineers with complementary strengths, frontend
+        architecture and Python/cloud backend engineering, who wanted to build software the way they believe it
+        should be built: with strong architecture, direct communication, and full ownership from idea to
+        production.
+      </p>
+    </div>
+    <div appReveal [appRevealDelay]="80">
+      <h2 class="font-display text-xl font-semibold text-primary-text">Our philosophy</h2>
+      <p class="mt-4 leading-relaxed text-secondary-text">
+        Good software starts with understanding the problem. We favor architecture that supports growth without
+        unnecessary complexity, keep boundaries clear and components reusable, and deliver in frequent,
+        incremental steps so feedback shapes the product early — not after launch.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-border bg-surface/40 py-16 sm:py-20">
+  <div class="container-page">
+    <app-section-heading eyebrow="Founders" heading="The founders." />
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      @for (founder of founders; track founder.slug; let i = $index) {
+        <a
+          appReveal
+          [appRevealDelay]="i * 90"
+          [routerLink]="['/about', founder.slug]"
+          class="group rounded-2xl border border-border bg-surface p-8 shadow-card transition-colors hover:border-accent/50"
+        >
+          <h3 class="font-display text-xl font-semibold text-primary-text">{{ founder.name }}</h3>
+          <p class="mt-1 text-sm font-medium text-accent-bright">{{ founder.role }}</p>
+          <p class="mt-4 text-sm leading-relaxed text-secondary-text">{{ founder.summary }}</p>
+          <span class="mt-5 inline-flex items-center text-sm font-medium text-primary-text opacity-0 transition-opacity group-hover:opacity-100">
+            Full profile →
+          </span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-border py-16 sm:py-20">
+  <div class="container-page">
+    <app-section-heading eyebrow="Together" heading="Combined capabilities." />
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      @for (capability of capabilities; track capability.title; let i = $index) {
+        <div appReveal [appRevealDelay]="i * 70" class="rounded-2xl border border-border bg-surface p-6">
+          <h3 class="font-display text-base font-semibold text-primary-text">{{ capability.title }}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ capability.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-border bg-surface/40 py-20 text-center sm:py-28">
+  <div class="container-page">
+    <h2 class="text-fluid-display font-display font-semibold text-primary-text">Have a project in mind?</h2>
+    <p class="mx-auto mt-4 max-w-xl text-secondary-text">Tell us what you're building. We'll figure out the engineering.</p>
+    <div class="mt-8 flex justify-center">
+      <app-button link="/start-a-project" size="lg">Start a Project →</app-button>
+    </div>
+  </div>
+</section>
