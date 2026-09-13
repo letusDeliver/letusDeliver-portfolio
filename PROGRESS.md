@@ -1,8 +1,8 @@
 # letusdeliver — Project Memory / Progress Log
 
-**Read this file first if you're picking this project back up in a new session.** It exists so a fresh session (with no prior context) can understand what exists, why decisions were made, what's still missing, and where to pick up — without re-deriving anything from scratch.
+**This is the detailed history/rationale file.** For a 30-second "where are we right now" summary, read `MEMORY.md` first — it points back into the relevant section here for anything that needs more depth. For repo conventions and hard rules (content integrity, git workflow, known linter false-positives, the WCAG contrast method), read `CLAUDE.md`. This file exists so a fresh session (with no prior context) can understand what exists, why decisions were made, what's still missing, and where to pick up — without re-deriving anything from scratch.
 
-Last updated: 2026-09-13 (branding assets — see §13; founder profile photos — see §14; dark/light theme switcher — see §15)
+Last updated: 2026-09-13 (branding assets — see §13; founder profile photos — see §14; dark/light theme switcher — see §15; CLAUDE.md/MEMORY.md — see §16)
 
 ---
 
@@ -212,3 +212,18 @@ The site was built dark-only (see §7.6's WCAG contrast work, all measured again
 - **Toggle UI**: added to `src/app/layout/header/header.html` — a sun/moon icon button (inline SVG, no icon library), present in both the desktop nav bar (next to "Start a Project") and the mobile header bar (next to the hamburger button), each with an `aria-label` describing the action ("Switch to light theme" / "Switch to dark theme"). Not added to the footer or mobile nav panel — one control, reachable from every page via the sticky header, was judged sufficient; don't duplicate it elsewhere without a reason.
 - **Not done / explicitly out of scope**: no "system" third option (dark/light only, per what was actually asked for); `public/site.webmanifest`'s `theme_color`/`background_color` stay fixed at the dark values (PWA manifest colors aren't easily made dynamic per-session and weren't part of this ask); footer/mobile-nav-panel don't get their own toggle (see above).
 - Verified: `ng lint` clean, `ng test` 10/10 pass, `ng build` clean (23 routes; confirmed the prerendered HTML's `<html>` tag defaults to `data-theme="dark"`, i.e. SSR doesn't guess/leak a client's stored preference), `npm run e2e -- --project=chromium` 13/13 pass (header restructuring didn't break mobile nav). Playwright screenshots of the running dev server, toggled to light and **scrolled through fully before capture** (see the §7 scroll-before-screenshot gotcha — skipping this once during this session's own QA produced a misleading blank-gray-box screenshot that looked like a bug and wasn't one), confirm every page — home, work list, a work detail page, about, services, and the mobile header/menu — reads correctly in light mode. Also confirmed the choice survives a reload (`localStorage` persistence) and that SSR-rendered markup is theme-neutral-default (dark) as intended.
+
+### 15a. Follow-up fix: hero gradient inline styles (same day)
+
+The VS Code Problems panel (Microsoft Edge Tools / webhint extension, separate from `ng lint`) flagged the two `style="stop-color: var(...)"` attributes added to `hero.html`'s SVG gradient in §15 as `no-inline-styles`. Fixed by adding `.stop-color-accent` / `.stop-color-accent-bright` classes to `src/styles.css` and using `class="..."` on the `<stop>` elements instead — same rendered result (verified via screenshot), just not an inline `style=` attribute. Commit `d8dde8a`.
+
+The same Problems-panel pass also surfaced several **false positives**, left unfixed — see `CLAUDE.md`'s "VS Code Problems panel is not the source of truth" section for the full list and why each one is not a real bug (bound `[alt]` bindings, `@for`/`@if` inside `<ul>`, `<ng-content>`-projected button text, and a stale cached diagnostic pointing at the already-deleted `public/favicon_io/site.webmanifest` from §13).
+
+## 16. CLAUDE.md and MEMORY.md (added 2026-09-13)
+
+Added two new root files, specifically so a brand-new session (no prior conversation context at all) can orient itself fast, in this order:
+
+1. **`MEMORY.md`** — a short "current state at a glance": what's done, what's genuinely still open (vs. just "could be nice"), and the last few things changed. Meant to be read in 30 seconds.
+2. **`CLAUDE.md`** — the operating guide: hard rules (content integrity, git workflow), the verification checklist, the note that `ng lint` (not the VS Code Problems panel) is this project's source of truth for lint correctness, the WCAG contrast method, the recurring scroll-before-screenshot gotcha, and the image-processing workflow (system Python + Pillow, no npm image deps).
+
+Neither duplicates this file (`PROGRESS.md`) — they're both meant to be short and to point here for the "why," not restate it. **When you finish any future unit of work, update `MEMORY.md`'s "what's still open" / "last few things done" sections** (it's meant to stay current, unlike `PROGRESS.md` which is an append-only log) — and add a new numbered section here if the work has real rationale worth preserving.
