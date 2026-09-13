@@ -25,30 +25,66 @@
       }
     </nav>
 
-    <div class="hidden md:block">
+    <div class="hidden items-center gap-2 md:flex">
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-lg p-2 text-secondary-text transition-colors hover:text-primary-text"
+        [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+        (click)="themeService.toggle()"
+      >
+        @if (themeService.theme() === 'dark') {
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.75" />
+            <path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8l1.8-1.8M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+          </svg>
+        } @else {
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" />
+          </svg>
+        }
+      </button>
       <app-button link="/start-a-project" size="md" (click)="onStartProjectClick()">
         Start a Project →
       </app-button>
     </div>
 
-    <button
-      type="button"
-      class="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-primary-text"
-      [attr.aria-expanded]="mobileMenuOpen()"
-      aria-controls="mobile-nav-panel"
-      [attr.aria-label]="mobileMenuOpen() ? 'Close menu' : 'Open menu'"
-      (click)="toggleMenu()"
-    >
-      @if (!mobileMenuOpen()) {
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
-        </svg>
-      } @else {
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
-        </svg>
-      }
-    </button>
+    <div class="flex items-center gap-1 md:hidden">
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-lg p-2 text-secondary-text transition-colors hover:text-primary-text"
+        [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+        (click)="themeService.toggle()"
+      >
+        @if (themeService.theme() === 'dark') {
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.75" />
+            <path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8l1.8-1.8M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+          </svg>
+        } @else {
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" />
+          </svg>
+        }
+      </button>
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-lg p-2 text-primary-text"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        aria-controls="mobile-nav-panel"
+        [attr.aria-label]="mobileMenuOpen() ? 'Close menu' : 'Open menu'"
+        (click)="toggleMenu()"
+      >
+        @if (!mobileMenuOpen()) {
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+          </svg>
+        } @else {
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+          </svg>
+        }
+      </button>
+    </div>
   </div>
 
   @if (mobileMenuOpen()) {

@@ -1,7 +1,18 @@
 /**
  * Design tokens — single source of truth for color, radius and shadow
  * primitives. Tailwind v4 reads `@theme` and generates utilities
- * (bg-background, text-primary-text, etc.) plus CSS custom properties.
+ * (bg-background, text-primary-text, etc.) that reference these as CSS
+ * custom properties — so the values below are the *default (dark)* theme,
+ * and the `[data-theme="light"]` block further down overrides the same
+ * custom properties for the light theme. See `core/services/theme.service.ts`
+ * for how `data-theme` gets set on `<html>`.
+ *
+ * `--color-on-accent` is the text color used on top of accent-colored
+ * surfaces (buttons). It is deliberately its own token, verified per theme
+ * against `--color-accent`/`--color-accent-bright` — NOT derived from
+ * `--color-background` — because those are two independent contrast
+ * problems that happen to have shared a color in the dark theme only by
+ * coincidence. See the WCAG contrast note in `shared/ui/button/button.ts`.
  */
 @theme {
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
@@ -25,7 +36,46 @@
 
   --color-accent: #8b5cf6;
   --color-accent-bright: #a78bfa;
+  --color-on-accent: #0a0a0b;
 
   --shadow-glow: 0 0 60px -15px rgba(139, 92, 246, 0.35);
   --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.03) inset, 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+/**
+ * Light theme overrides. Every value here was measured with the same
+ * relative-luminance/contrast-ratio method as the dark theme (see
+ * PROGRESS.md for the full table) — this is not "invert the dark
+ * palette", each pairing was independently verified against WCAG AA:
+ *
+ *   primary-text   #0a0a0b on #ffffff  → 19.79:1
+ *   secondary-text #52525b on #ffffff  → 7.73:1  (on surface: 7.22:1)
+ *   muted-text     #6b6b74 on #ffffff  → 5.28:1  (on surface: 4.93:1)
+ *   accent-bright as TEXT on #ffffff   → 7.10:1  (the dark theme's
+ *     #a78bfa only manages 2.72:1 on white, so light mode uses a
+ *     materially darker violet, not the same hex — a lighter accent
+ *     that reads well on near-black does not automatically read well
+ *     on white)
+ *   on-accent (white) on accent bg     → 5.70:1
+ *   on-accent (white) on accent-bright bg → 7.10:1
+ *
+ * Border/surface/elevated are not text, so they're picked for visible-but-
+ * soft card edges rather than chasing a specific ratio.
+ */
+[data-theme='light'] {
+  --color-background: #ffffff;
+  --color-surface: #f7f7f8;
+  --color-elevated: #eeeef0;
+  --color-border: #d4d4d8;
+
+  --color-primary-text: #0a0a0b;
+  --color-secondary-text: #52525b;
+  --color-muted-text: #6b6b74;
+
+  --color-accent: #7c3aed;
+  --color-accent-bright: #6d28d9;
+  --color-on-accent: #ffffff;
+
+  --shadow-glow: 0 0 60px -15px rgba(124, 58, 237, 0.25);
+  --shadow-card: 0 1px 2px 0 rgba(10, 10, 11, 0.04), 0 8px 24px -12px rgba(10, 10, 11, 0.16);
 }

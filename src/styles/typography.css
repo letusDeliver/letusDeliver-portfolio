@@ -4,6 +4,10 @@ html {
   color-scheme: dark;
 }
 
+html[data-theme='light'] {
+  color-scheme: light;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-primary-text);

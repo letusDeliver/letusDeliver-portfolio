@@ -28,11 +28,13 @@ export class Button {
   disabled = input(false);
 
   protected readonly classesByVariant: Record<ButtonVariant, string> = {
-    // White text on the brand accent only measures ~4.2:1 (~2.7:1 on the
-    // hover shade) — under WCAG AA's 4.5:1 for normal-size text. Dark
-    // text on both accent shades comfortably passes (~4.7:1 / ~7.3:1).
+    // `--color-on-accent` is a dedicated, per-theme-verified token — not
+    // derived from the page background — because "text color that's
+    // readable on the accent color" and "text color that's readable on
+    // the page background" are different contrast problems that only
+    // shared a value by coincidence in the dark theme. See tokens.css.
     primary:
-      'bg-accent text-background hover:bg-accent-bright shadow-[0_0_0_1px_rgba(139,92,246,0.4)] hover:shadow-glow',
+      'bg-accent text-on-accent hover:bg-accent-bright shadow-[0_0_0_1px_rgba(139,92,246,0.4)] hover:shadow-glow',
     secondary: 'bg-elevated text-primary-text border border-border hover:border-accent/60',
     ghost: 'text-primary-text hover:text-accent-bright',
   };

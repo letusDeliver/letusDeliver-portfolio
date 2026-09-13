@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, PLATFORM_ID, inject, signal } from
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Button } from '../../shared/ui/button/button';
 import { AnalyticsService } from '../../core/services/analytics.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 interface NavLink {
   label: string;
@@ -18,6 +19,7 @@ export class Header {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly analytics = inject(AnalyticsService);
+  protected readonly themeService = inject(ThemeService);
 
   protected readonly scrolled = signal(false);
   readonly mobileMenuOpen = signal(false);
