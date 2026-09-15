@@ -7,15 +7,14 @@
 export const environment = {
   production: false,
   publicSiteUrl: 'http://localhost:4200',
-  apiBaseUrl: 'http://localhost:4200/api',
-  contactEndpoint: '/api/contact',
+  apiBaseUrl: 'http://127.0.0.1:8010/api',
+  contactEndpoint: 'http://127.0.0.1:8010/api/contact/submissions/',
   analyticsId: '',
   /**
-   * No contact backend exists yet in this repository (see
-   * core/services/contact.service.ts for the documented API contract).
-   * While that's true, the dev environment simulates a successful
-   * response so the Start a Project flow can be demoed locally. Set to
-   * `false` once a real `contactEndpoint` is live.
+   * The Django backend (letusDeliver-backend, run via `python manage.py
+   * runserver 8010` locally) is live at `contactEndpoint` above — CORS is
+   * already configured there for `http://localhost:4200`. Set back to
+   * `true` if you're working without the backend running locally.
    */
-  useMockContactApi: true,
+  useMockContactApi: false,
 };

@@ -7,8 +7,12 @@ export const environment = {
   production: true,
   publicSiteUrl: 'https://letusdeliver.com',
   apiBaseUrl: 'https://api.letusdeliver.com',
-  contactEndpoint: '/api/contact',
+  contactEndpoint: 'https://api.letusdeliver.com/api/contact/submissions/',
   analyticsId: '',
-  /** Flip to `false` only once a real contact backend is deployed. */
+  /**
+   * The real backend (Django, same API contract verified against the local
+   * instance — see core/services/contact.service.ts) is not deployed to
+   * `api.letusdeliver.com` yet. Flip to `false` once it is.
+   */
   useMockContactApi: true,
 };

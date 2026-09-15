@@ -43,9 +43,18 @@ Before "fixing" something the Problems panel flags, run `ng lint` first — if t
 
 Every text/background color pairing in `src/styles/tokens.css` was independently verified for WCAG AA contrast (relative luminance formula: `L = 0.2126R + 0.7152G + 0.0722B` per-channel-linearized, ratio `= (L1+0.05)/(L2+0.05)`, need ≥4.5:1 for normal text). This includes **two separate palettes** — dark (default, in the `@theme` block) and light (the `[data-theme='light']` override block) — and they are **not** simple inversions of each other; some tokens (notably the accent purple) needed genuinely different hex values per theme to pass contrast as text. If you change or add a color, recompute the ratio for both themes before committing to it — don't eyeball it. See `PROGRESS.md` §7.6 and §15 for the worked examples and the exact numbers already verified.
 
-## Known recurring gotcha
+## Known recurring gotchas
 
-A `fullPage` Playwright screenshot taken without scrolling through the page first will show most below-the-fold content as blank — this is the `appReveal` scroll-triggered reveal directive never getting an `IntersectionObserver` hit, not a bug. Always scroll (or auto-scroll) through the page before screenshotting for QA, or you'll misdiagnose a phantom bug. (This has happened twice already in this project's history — see `PROGRESS.md` §7 and §15.)
+- A `fullPage` Playwright screenshot taken without scrolling through the page first will show most below-the-fold content as blank — this is the `appReveal` scroll-triggered reveal directive never getting an `IntersectionObserver` hit, not a bug. Always scroll (or auto-scroll) through the page before screenshotting for QA, or you'll misdiagnose a phantom bug. (This has happened twice already in this project's history — see `PROGRESS.md` §7 and §15.)
+- jsdom (the Vitest unit-test environment) has no real `DataTransfer`/`FileList` constructors — `new DataTransfer()` throws `ReferenceError` in a spec. To simulate a file-input selection, use `Object.defineProperty(input, 'files', { value: [file], configurable: true })` then dispatch a `change` event; see `start-project.spec.ts`'s attachment-removal test.
+
+## Contact form backend
+
+The `/start-a-project` form's real backend (Django REST Framework) is **not part of this repository** — it's a separate service the user runs locally (currently `http://127.0.0.1:8010`, admin at `/admin/`). `ContactService` (`src/app/core/services/contact.service.ts`) talks to it via `environment.contactEndpoint`, gated by `environment.useMockContactApi`:
+
+- **`environment.ts`** (dev): currently `useMockContactApi: false`, pointed at the real local backend. If that backend isn't running when you pick this up, contact-form submissions in the dev server will fail with a network error — that's an environment issue, not a frontend regression. Either get the backend running again, or flip `useMockContactApi` back to `true` to demo the form without it.
+- **`environment.production.ts`**: still `useMockContactApi: true` — `api.letusdeliver.com` is not a real deployed backend yet.
+- **Never hand-guess the API contract** (field names, choice-slug values like `web_application`/`1_3_months`, response/error shapes) — verify against the backend's own DRF `OPTIONS` response for `/api/contact/submissions/` (`curl -X OPTIONS <endpoint>`) the way this was originally done. If the backend's shape ever changes, that's where to re-check, not the Postman collection's example bodies. Full rationale: `PROGRESS.md` §17.
 
 ## Image processing
 
@@ -56,5 +65,6 @@ There are no image-processing npm packages in this project. When the user drops 
 - **Content** (projects, founders, services, articles): `src/app/core/data/*.ts` — typed data only, never hardcode content into templates.
 - **Design tokens**: `src/styles/tokens.css`.
 - **Theme system**: `src/app/core/services/theme.service.ts` + the `[data-theme]` blocks in `tokens.css`/`typography.css`.
+- **Shared presentational UI** (`Button`, `Tag`, `SectionHeading`, `Toast`, ...): `src/app/shared/ui/*` — small, input/output-driven components with no service dependencies.
 - **Full history & rationale for every decision**: `PROGRESS.md`.
 - **Current state at a glance**: `MEMORY.md`.

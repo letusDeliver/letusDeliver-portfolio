@@ -1,6 +1,6 @@
 # MEMORY.md — Current State at a Glance
 
-Last updated: 2026-09-13, at commit `d8dde8a`.
+Last updated: 2026-09-14. Working tree has uncommitted changes on top of commit `3eca13d` (see below) — not yet committed, per "never commit unless asked."
 
 This is the 30-second version of "where are we." For full history and the reasoning behind every decision, see **`PROGRESS.md`**. For how to work in this repo (conventions, hard rules, known gotchas), see **`CLAUDE.md`**.
 
@@ -16,10 +16,12 @@ This is the 30-second version of "where are we." For full history and the reason
 
 1. **`ibkr-signal-scanner`'s GitHub link is deliberately withheld.** The source repo (`Mrityunjay1997/ibkr-webapp-main`) has a hardcoded secret committed in `config.ini`. Do not add the link to `projects.data.ts` until the user explicitly confirms the secret has been rotated. Full detail: `PROGRESS.md` §4a.
 2. **No real letusdeliver-owned client work exists yet** — the company is new. `/work` only shows personal projects and clearly-labeled prior-employment work. Do not invent client work, testimonials, or metrics under any circumstance.
-3. **Placeholders waiting on real input from the user, not code work**: social media URLs (`site.config.ts`), insights articles (currently 3 "coming soon"), privacy/terms legal copy (placeholder, pending real legal review), a real contact-form backend (currently a labeled mock), and a chosen deployment/hosting target (no deploy step in CI yet). Full list: `PROGRESS.md` §11.
+3. **Placeholders waiting on real input from the user, not code work**: social media URLs (`site.config.ts`), insights articles (currently 3 "coming soon"), privacy/terms legal copy (placeholder, pending real legal review), and a chosen deployment/hosting target (no deploy step in CI yet). Full list: `PROGRESS.md` §11.
+4. **Contact form backend is real in dev, still mocked in production.** A real Django backend now exists and is wired up for local dev (`environment.ts` → `http://127.0.0.1:8010/api/contact/submissions/`, `useMockContactApi: false`) — verified end-to-end against the running backend. `environment.production.ts` is still `useMockContactApi: true` because `api.letusdeliver.com` isn't a deployed backend yet; flip that once it is. Full detail: `PROGRESS.md` §17.
 
 ## Last few things done (most recent first)
 
+- **Contact form: wired to the real backend + 4 follow-up UX fixes** (both same day, not yet committed — `PROGRESS.md` §17/§17a): swapped the mock for the real Django backend in dev (snake_case field mapping verified against the backend's own DRF `OPTIONS` metadata, not guessed; real success/400/429 handling; per-field backend error display), then fixed double-submission, no way to remove a chosen attachment, no success toast (new `shared/ui/toast` component), and fields accepting leading/trailing whitespace. `ng test` 13 → 16, all passing.
 - Fixed a webhint "no-inline-styles" false-flag on the hero SVG gradient (moved `stop-color` out of an inline `style=` attribute into a CSS class) — commit `d8dde8a`.
 - Added the dark/light theme switcher (`ThemeService`, header toggle, dedicated `--color-on-accent` token, fixed a latent theme-coupling bug in the primary button) — commit `058d663`.
 - Enlarged and restructured the founder cards (home + `/about`) to an image-left/description-right flex layout; enlarged the founder detail hero photo.
@@ -34,5 +36,7 @@ cd D:\Start-up\letusdeliver
 npm install   # if node_modules isn't present
 npm start     # dev server -> http://localhost:4200
 ```
+
+The contact form's real backend is a separate service, not started by anything above — see `CLAUDE.md`'s "Contact form backend" section before assuming it's reachable.
 
 Read `CLAUDE.md` for the rules of the road, then jump into the relevant `PROGRESS.md` section for whatever you're about to touch. Don't assume — re-read the section, the reasoning there is often load-bearing.

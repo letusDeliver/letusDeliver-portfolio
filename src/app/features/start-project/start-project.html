@@ -1,4 +1,6 @@
 <section class="py-20 sm:py-28">
+  <app-toast [message]="toastMessage()" (dismissed)="toastMessage.set(null)" />
+
   <div class="container-page max-w-2xl">
     <app-section-heading
       eyebrow="Start a project"
@@ -26,7 +28,7 @@
               class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
             />
             @if (isInvalid('name')) {
-              <p id="name-error" class="mt-1 text-xs text-red-400">Please enter your name.</p>
+              <p id="name-error" class="mt-1 text-xs text-red-400">{{ fieldError('name') }}</p>
             }
           </div>
 
@@ -42,7 +44,7 @@
               class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
             />
             @if (isInvalid('email')) {
-              <p id="email-error" class="mt-1 text-xs text-red-400">Please enter a valid email address.</p>
+              <p id="email-error" class="mt-1 text-xs text-red-400">{{ fieldError('email') }}</p>
             }
           </div>
         </div>
@@ -53,8 +55,13 @@
             id="company"
             type="text"
             formControlName="company"
+            [attr.aria-invalid]="isInvalid('company')"
+            aria-describedby="company-error"
             class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
           />
+          @if (isInvalid('company')) {
+            <p id="company-error" class="mt-1 text-xs text-red-400">{{ fieldError('company') }}</p>
+          }
         </div>
 
         <div class="grid gap-6 sm:grid-cols-2">
@@ -74,7 +81,7 @@
               }
             </select>
             @if (isInvalid('projectType')) {
-              <p id="projectType-error" class="mt-1 text-xs text-red-400">Please select a project type.</p>
+              <p id="projectType-error" class="mt-1 text-xs text-red-400">{{ fieldError('projectType') }}</p>
             }
           </div>
 
@@ -94,7 +101,7 @@
               }
             </select>
             @if (isInvalid('timeline')) {
-              <p id="timeline-error" class="mt-1 text-xs text-red-400">Please select a timeline.</p>
+              <p id="timeline-error" class="mt-1 text-xs text-red-400">{{ fieldError('timeline') }}</p>
             }
           </div>
         </div>
@@ -111,7 +118,7 @@
             class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
           ></textarea>
           @if (isInvalid('projectDescription')) {
-            <p id="projectDescription-error" class="mt-1 text-xs text-red-400">Tell us a bit more — at least 20 characters.</p>
+            <p id="projectDescription-error" class="mt-1 text-xs text-red-400">{{ fieldError('projectDescription') }}</p>
           }
         </div>
 
@@ -122,18 +129,37 @@
             type="text"
             formControlName="budget"
             placeholder="e.g. $5k–$15k, or flexible"
+            [attr.aria-invalid]="isInvalid('budget')"
+            aria-describedby="budget-error"
             class="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-primary-text placeholder:text-muted-text focus-visible:border-accent"
           />
+          @if (isInvalid('budget')) {
+            <p id="budget-error" class="mt-1 text-xs text-red-400">{{ fieldError('budget') }}</p>
+          }
         </div>
 
         <div>
           <label for="attachment" class="text-sm font-medium text-primary-text">Attachment (optional)</label>
           <input
+            #attachmentInput
             id="attachment"
             type="file"
             (change)="onFileSelected($event)"
+            [attr.aria-invalid]="!!attachmentError()"
+            aria-describedby="attachment-error"
             class="mt-2 w-full text-sm text-secondary-text file:mr-4 file:rounded-full file:border-0 file:bg-elevated file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary-text"
           />
+          @if (attachment(); as file) {
+            <div class="mt-2 flex items-center gap-2 text-xs text-secondary-text">
+              <span class="truncate">Selected: {{ file.name }}</span>
+              <button type="button" (click)="removeAttachment()" class="font-medium text-accent-bright hover:underline">
+                Remove
+              </button>
+            </div>
+          }
+          @if (attachmentError()) {
+            <p id="attachment-error" class="mt-1 text-xs text-red-400">{{ attachmentError() }}</p>
+          }
         </div>
 
         @if (errorMessage()) {
