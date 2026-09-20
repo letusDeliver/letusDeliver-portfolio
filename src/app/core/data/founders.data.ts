@@ -14,10 +14,10 @@ export const FOUNDERS: Founder[] = [
     slug: 'kunal',
     name: 'Kunal',
     role: 'Co-Founder · Frontend & Product Engineering',
-    yearsExperience: '4.5+ years',
+    yearsExperience: '5+ years',
     photoUrl: 'images/kunal-profile.jpg',
     summary:
-      'Kunal leads frontend and product engineering at letusdeliver, with 4.5+ years building production-grade Angular applications and turning product requirements into scalable, maintainable software.',
+      'Kunal leads frontend and product engineering at letusdeliver, with 5+ years building production-grade Angular applications and turning product requirements into scalable, maintainable software.',
     philosophy:
       'Starts from the problem, not the framework — architecture should be exactly as complex as the product needs and no more. Favors component boundaries and state patterns that stay maintainable as a codebase grows, treats accessibility and performance as part of the definition of done rather than a later pass, and uses AI-assisted, agent-driven workflows (Claude Code) as a working practice for codebase analysis, refactoring and documentation — a lever for velocity and quality, not a shortcut around engineering judgment.',
     expertise: [
@@ -157,10 +157,10 @@ export const FOUNDERS: Founder[] = [
     slug: 'mrityunjay',
     name: 'Mrityunjay',
     role: 'Co-Founder · Backend, Cloud & Data Engineering',
-    yearsExperience: '4+ years',
+    yearsExperience: '5+ years',
     photoUrl: 'images/mrityunjay-profile.jpg',
     summary:
-      'Mrityunjay leads backend, cloud and data engineering at letusdeliver, with 4+ years designing production-grade backend systems, cloud infrastructure and data platforms that let products run reliably and scale.',
+      'Mrityunjay leads backend, cloud and data engineering at letusdeliver, with 5+ years designing production-grade backend systems, cloud infrastructure and data platforms that let products run reliably and scale.',
     philosophy:
       'Believes reliable software is built on strong foundations — good APIs, thoughtful data models, automated deployments, observable systems and clear architecture are what let products grow without becoming difficult to maintain. Looks beyond individual backend features to the engineering systems behind the product: architecture → infrastructure → data → reliability → scale. Also exploring how AI can extend beyond code generation into requirement analysis, test generation, debugging, documentation and infrastructure automation — pairing experienced engineering judgment with AI-assisted workflows to reduce repetitive work and speed up delivery.',
     expertise: [

@@ -14,7 +14,7 @@ interface WhyPoint {
 })
 export class WhyUs {
   protected readonly points: WhyPoint[] = [
-    { title: 'Experienced', description: '8.5+ years of combined professional experience.' },
+    { title: 'Experienced', description: '10+ years of combined professional experience.' },
     { title: 'End-to-End', description: 'Frontend, backend, databases, cloud and data engineering.' },
     { title: 'Founder-Led', description: 'Work directly with the engineers building your product.' },
     {

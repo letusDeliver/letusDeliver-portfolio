@@ -13,7 +13,7 @@ interface Stat {
 })
 export class Credibility {
   protected readonly stats: Stat[] = [
-    { line1: '8.5+ Years', line2: 'Combined Experience' },
+    { line1: '10+ Years', line2: 'Combined Experience' },
     { line1: 'Full-Stack', line2: 'Engineering' },
     { line1: 'Cloud &', line2: 'AI' },
     { line1: 'Founder-', line2: 'Led' },
