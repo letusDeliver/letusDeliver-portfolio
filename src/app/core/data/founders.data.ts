@@ -186,7 +186,7 @@ export const FOUNDERS: Founder[] = [
     projectSlugs: [
       'ibkr-signal-scanner',
       'flowmedic',
-      'nightwatch-platform',
+      'careernaukri',
       'enterprise-data-pipelines',
       'full-stack-product-applications',
     ],

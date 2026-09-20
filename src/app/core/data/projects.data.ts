@@ -26,6 +26,8 @@ export const PROJECTS: Project[] = [
     featured: true,
     ownershipType: 'personal',
     githubUrl: 'https://github.com/letusDeliver/multi-app-architecture-system',
+    imageUrl: '/images/work/enterprise-micro-frontend-shell.jpg',
+    imageAlt: 'The Platform Shell running with the hello-world-app remote mounted via Native Federation, demonstrating the shell theme, a shell-mediated notify/confirm call, and a dynamically registered header action.',
     overview:
       'An Angular 21 platform shell that hosts independently built and deployed applications behind one consistent experience, composing them at runtime via Native Federation rather than compiling their code into the shell\'s own build.',
     challenge:
@@ -73,6 +75,8 @@ export const PROJECTS: Project[] = [
     featured: true,
     ownershipType: 'personal',
     githubUrl: 'https://github.com/letusDeliver/employee-management-backend',
+    imageUrl: '/images/work/employee-management-system.jpg',
+    imageAlt: 'The Employee Management System frontend\'s landing page, highlighting employee records, role-based access, and document management.',
     overview:
       'A single-tenant Employee Management System covering HR records, department/manager hierarchy and documents, built feature-by-feature behind a securable API where admins, managers and individual employees can be granted different, fine-grained access to the same resources.',
     challenge:
@@ -107,6 +111,9 @@ export const PROJECTS: Project[] = [
     featured: true,
     ownershipType: 'personal',
     statusLabel: 'Actively used',
+    githubUrl: 'https://github.com/Mrityunjay1997/ibkr-webapp-main',
+    imageUrl: '/images/work/ibkr-signal-scanner.jpg',
+    imageAlt: 'The IBKR backtesting/scanner dashboard, showing the background-scanner controls, setup save/load, and indicator configuration table.',
     overview:
       'A locally-run trading assistant that opens a persistent socket connection to a local Interactive Brokers TWS/Gateway instance, scans the US equity market for movers in real time, and lets the user place and manage orders — including session-aware bracket and multi-leg flows — from a browser dashboard.',
     challenge:
@@ -174,6 +181,8 @@ export const PROJECTS: Project[] = [
     ownershipType: 'personal',
     statusLabel: 'Work in progress',
     githubUrl: 'https://github.com/letusDeliver/Donezo',
+    imageUrl: '/images/work/donezo.jpg',
+    imageAlt: 'Donezo\'s Kanban ticket board, showing Backlog, Todo, In Progress and Review columns with priority-tagged ticket cards.',
     overview:
       'Donezo is an in-progress Angular 20 project-tracker: a sidebar-driven app organizing work into projects, tickets and tasks, built with standalone components and lazy-loaded feature routes.',
     challenge:
@@ -235,20 +244,38 @@ export const PROJECTS: Project[] = [
     overview: 'A personal portfolio site built with Angular and the Angular Router to showcase projects and background.',
   },
   {
-    slug: 'nightwatch-platform',
-    title: 'Nightwatch Platform',
-    category: 'Cloud',
-    summary: 'An enterprise monitoring and operational platform built on Python, FastAPI and GCP.',
+    slug: 'careernaukri',
+    title: 'CareerNaukri',
+    category: 'Full Stack',
+    summary: 'A two-sided Django job board — candidate profiles and job applications on one side, recruiter postings and Razorpay-billed subscriptions on the other.',
     description:
-      'Backend engineering work delivered as part of professional employment. Shown here as evidence of engineering capability — this was client/employer work, not a LetUsDeliver engagement.',
-    technologies: ['Python', 'FastAPI', 'GCP', 'BigQuery', 'Cloud Storage', 'Datastore', 'Docker', 'GitHub Actions', 'Jenkins'],
+      'A self-directed Django project building a full job-marketplace platform end to end: candidate and recruiter accounts, structured resume profiles, job posting and applications, recruiter subscription billing, and a multi-section content system.',
+    technologies: ['Python', 'Django', 'SQLite', 'Razorpay', 'django-ckeditor', 'Crispy Forms (Bootstrap 5)'],
     featured: false,
-    ownershipType: 'professional-experience',
-    contextLabel: 'Professional experience — Insight Global, client: The Home Depot',
+    ownershipType: 'personal',
+    githubUrl: 'https://github.com/Mrityunjay1997/JobSearch',
+    imageUrl: '/images/work/jobsearch.jpg',
+    imageAlt: "CareerNaukri's landing page, showing the job search bar and open-positions/categories/employers stats.",
     overview:
-      'An enterprise monitoring and operational platform. Backend services and API endpoints engineered using FastAPI, integrating BigQuery, Cloud Storage and Datastore for cloud data processing and platform operations.',
+      'CareerNaukri is a two-sided job board built on Django: candidates build a structured profile — employment history, education, technical skills, and projects — and apply to job listings, while recruiters post jobs, browse applicants, and manage postings from a dedicated dashboard behind a subscription plan. A parallel content system — a blog, career-advice articles, and a candidate help centre, each with its own category/tag taxonomy — sits alongside the core job-board functionality.',
+    challenge:
+      'Modeling two structurally different user roles (candidate vs. recruiter) against a single Django user model, gating recruiter features behind a paid subscription tier with real payment processing, and supporting three separate content types (blog, career advice, help centre) without duplicating the same category/tag/comment machinery three times over.',
     solution:
-      'Backend service development on FastAPI with GCP-native data services (BigQuery, Cloud Storage, Datastore), improved through production issue investigation, root-cause analysis and defect resolution, alongside CI/CD modernization with containerized deployments.',
+      'A single custom User model carries a `role` field plus every candidate-facing profile attribute directly on the user row, while structured, repeatable profile sections — employment history, education, technical skills, and portfolio projects — are modeled as separate one-to-many tables keyed to the user, each with its own add/edit/delete view pair. New recruiters are automatically enrolled in a "Basic" subscription plan on signup; upgrading is handled through a Razorpay checkout callback that records the transaction and unlocks the paid plan, with PDF receipt generation. Configuration, including the Django secret key, is read through `python-decouple` rather than hardcoded, keeping secrets out of version control.',
+    features: [
+      'Role-based accounts (candidate / recruiter) on a single custom User model, with role-specific dashboards',
+      'Structured candidate profile builder: employment history, education, technical skills, and projects, each independently addable, editable, and deletable',
+      'Job posting, editing, and applicant tracking for recruiters; search, filtering, and one-click applications for candidates',
+      'Recruiter subscription plans with Razorpay payment integration, transaction history, and generated PDF receipts',
+      'A blog, a separate career-advice section, and a candidate help centre, each with its own category/tag taxonomy and rich-text authoring',
+      "Django's built-in email-based password reset flow",
+    ],
+    architectureNotes:
+      'Django 3.2 with class-based views for the CRUD-heavy flows (job posting, applicant lists, transaction history) and function-based views for the marketing/content pages. `django-ckeditor` powers rich-text fields across jobs, blog posts, and career-advice posts; `django-crispy-forms` (Bootstrap 5 pack) renders the many multi-field forms consistently.',
+    engineeringDecisions: [
+      'A single custom User model carrying a `role` field rather than separate Candidate/Recruiter models or Django groups — simpler at this scale, at the cost of nullable recruiter-only fields on every candidate row and vice versa.',
+      "Recruiter subscription enrollment handled inside an overridden `User.save()` (auto-assigning a Basic plan the first time a recruiter row is saved) rather than a separate signup-flow step — guarantees every recruiter has an active plan row, at the cost of coupling billing logic into the user model's persistence layer.",
+    ],
   },
   {
     slug: 'enterprise-data-pipelines',

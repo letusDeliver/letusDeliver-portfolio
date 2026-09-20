@@ -23,6 +23,10 @@ export interface Project {
   statusLabel?: string;
   demoUrl?: string;
   githubUrl?: string;
+  /** Path under /public to a real screenshot of the actual running project — never a stock photo or mockup. Omit rather than fabricate. */
+  imageUrl?: string;
+  /** Required alongside imageUrl: describes exactly what the screenshot shows. */
+  imageAlt?: string;
   overview?: string;
   challenge?: string;
   solution?: string;

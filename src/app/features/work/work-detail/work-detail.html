@@ -18,6 +18,14 @@
       <h1 class="mt-4 text-fluid-display font-display font-semibold text-primary-text">{{ project.title }}</h1>
       <p class="mt-4 text-lg leading-relaxed text-secondary-text">{{ project.summary }}</p>
 
+      @if (project.imageUrl) {
+        <img
+          [src]="project.imageUrl"
+          [alt]="project.imageAlt ?? ''"
+          class="mt-8 w-full rounded-2xl border border-border object-cover object-top shadow-card"
+        />
+      }
+
       @if (project.contextLabel) {
         <p class="mt-4 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-muted-text">
           {{ project.contextLabel }}. Shown here as evidence of engineering capability — not a letusdeliver client engagement.

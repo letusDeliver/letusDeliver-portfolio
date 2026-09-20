@@ -5,6 +5,7 @@ import { AnalyticsService } from '../../../core/services/analytics.service';
 import { Tag } from '../../../shared/ui/tag/tag';
 import { Button } from '../../../shared/ui/button/button';
 import { PROJECTS } from '../../../core/data';
+import { siteConfig } from '../../../core/config/site.config';
 
 const OWNERSHIP_LABEL: Record<string, string> = {
   letusdeliver: 'letusdeliver project',
@@ -45,6 +46,7 @@ export class WorkDetail {
           title: project.title,
           description: project.summary,
           path: `/work/${project.slug}`,
+          ...(project.imageUrl ? { image: `${siteConfig.siteUrl}${project.imageUrl}` } : {}),
         });
         this.analytics.track('work_project_viewed', { slug: project.slug });
       }
