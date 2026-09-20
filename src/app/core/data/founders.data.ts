@@ -15,7 +15,7 @@ export const FOUNDERS: Founder[] = [
     name: 'Kunal',
     role: 'Co-Founder · Frontend & Product Engineering',
     yearsExperience: '4.5+ years',
-    photoUrl: '/images/kunal-profile.jpg',
+    photoUrl: 'images/kunal-profile.jpg',
     summary:
       'Kunal leads frontend and product engineering at letusdeliver, with 4.5+ years building production-grade Angular applications and turning product requirements into scalable, maintainable software.',
     philosophy:
@@ -158,7 +158,7 @@ export const FOUNDERS: Founder[] = [
     name: 'Mrityunjay',
     role: 'Co-Founder · Backend, Cloud & Data Engineering',
     yearsExperience: '4+ years',
-    photoUrl: '/images/mrityunjay-profile.jpg',
+    photoUrl: 'images/mrityunjay-profile.jpg',
     summary:
       'Mrityunjay leads backend, cloud and data engineering at letusdeliver, with 4+ years designing production-grade backend systems, cloud infrastructure and data platforms that let products run reliably and scale.',
     philosophy:

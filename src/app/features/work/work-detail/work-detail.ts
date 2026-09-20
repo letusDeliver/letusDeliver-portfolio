@@ -47,7 +47,7 @@ export class WorkDetail {
           title: project.title,
           description: project.summary,
           path: `/work/${project.slug}`,
-          ...(project.imageUrl ? { image: `${siteConfig.siteUrl}${project.imageUrl}` } : {}),
+          ...(project.imageUrl ? { image: `${siteConfig.siteUrl}/${project.imageUrl}` } : {}),
         });
         this.analytics.track('work_project_viewed', { slug: project.slug });
       }

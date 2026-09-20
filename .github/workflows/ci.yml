@@ -6,6 +6,19 @@ on:
   pull_request:
     branches: [main]
 
+# Needed by the deploy job's actions/deploy-pages step (OIDC-based
+# deployment) — see https://github.com/actions/deploy-pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deployment at a time; never cancel one mid-flight in
+# favor of a newer push landing seconds later.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -41,3 +54,47 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+
+  deploy:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Deployed as a GitHub Pages *project* page
+      # (https://letusdeliver.github.io/letusDeliver-portfolio/), so every
+      # asset/route needs to resolve under that subpath — hence the
+      # explicit --base-href here, distinct from the plain `npm run build`
+      # above (which builds for the eventual letusdeliver.com custom
+      # domain, base href "/"). See PROGRESS.md for the full writeup,
+      # including the root-absolute-path fix this required across the app.
+      - name: Build for GitHub Pages
+        run: npm run build -- --base-href /letusDeliver-portfolio/
+
+      # GitHub Pages runs Jekyll on published content by default, which
+      # ignores files/folders starting with `_` — harmless here today, but
+      # a standard safeguard for any Angular/SPA static-site deploy.
+      - name: Disable Jekyll processing
+        run: touch dist/letusdeliver/browser/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/letusdeliver/browser
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

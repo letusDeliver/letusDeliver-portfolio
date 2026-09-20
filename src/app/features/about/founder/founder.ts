@@ -43,7 +43,7 @@ export class FounderPage {
           description: founder.summary,
           path: `/about/${founder.slug}`,
           type: 'profile',
-          ...(founder.photoUrl ? { image: `${siteConfig.siteUrl}${founder.photoUrl}` } : {}),
+          ...(founder.photoUrl ? { image: `${siteConfig.siteUrl}/${founder.photoUrl}` } : {}),
         });
         this.seo.setStructuredData('ld-person', personSchema(founder));
       }

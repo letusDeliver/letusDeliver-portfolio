@@ -38,7 +38,7 @@ export function personSchema(founder: Founder): Record<string, unknown> {
       url: siteConfig.siteUrl,
     },
     url: `${siteConfig.siteUrl}/about/${founder.slug}`,
-    ...(founder.photoUrl ? { image: `${siteConfig.siteUrl}${founder.photoUrl}` } : {}),
+    ...(founder.photoUrl ? { image: `${siteConfig.siteUrl}/${founder.photoUrl}` } : {}),
   };
 }
 

@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
     featured: true,
     ownershipType: 'personal',
     githubUrl: 'https://github.com/letusDeliver/employee-management-backend',
-    imageUrl: '/images/work/employee-management-system.jpg',
+    imageUrl: 'images/work/employee-management-system.jpg',
     imageAlt: 'The Employee Management System frontend\'s landing page, highlighting employee records, role-based access, and document management.',
     overview:
       'A single-tenant Employee Management System covering HR records, department/manager hierarchy and documents, built feature-by-feature behind a securable API where admins, managers and individual employees can be granted different, fine-grained access to the same resources.',
@@ -110,7 +110,7 @@ export const PROJECTS: Project[] = [
     ownershipType: 'personal',
     statusLabel: 'Actively used',
     githubUrl: 'https://github.com/Mrityunjay1997/ibkr-webapp-main',
-    imageUrl: '/images/work/ibkr-signal-scanner.jpg',
+    imageUrl: 'images/work/ibkr-signal-scanner.jpg',
     imageAlt: 'The IBKR backtesting/scanner dashboard, showing the background-scanner controls, setup save/load, and indicator configuration table.',
     overview:
       'A locally-run trading assistant that opens a persistent socket connection to a local Interactive Brokers TWS/Gateway instance, scans the US equity market for movers in real time, and lets the user place and manage orders — including session-aware bracket and multi-leg flows — from a browser dashboard.',
@@ -179,7 +179,7 @@ export const PROJECTS: Project[] = [
     ownershipType: 'personal',
     statusLabel: 'Work in progress',
     githubUrl: 'https://github.com/letusDeliver/Donezo',
-    imageUrl: '/images/work/donezo.jpg',
+    imageUrl: 'images/work/donezo.jpg',
     imageAlt: 'Donezo\'s Kanban ticket board, showing Backlog, Todo, In Progress and Review columns with priority-tagged ticket cards.',
     overview:
       'Donezo is an in-progress Angular 20 project-tracker: a sidebar-driven app organizing work into projects, tickets and tasks, built with standalone components and lazy-loaded feature routes.',
@@ -241,7 +241,7 @@ export const PROJECTS: Project[] = [
     featured: false,
     ownershipType: 'personal',
     githubUrl: 'https://github.com/Mrityunjay1997/JobSearch',
-    imageUrl: '/images/work/jobsearch.jpg',
+    imageUrl: 'images/work/jobsearch.jpg',
     imageAlt: "CareerNaukri's landing page, showing the job search bar and open-positions/categories/employers stats.",
     overview:
       'CareerNaukri is a two-sided job board built on Django: candidates build a structured profile — employment history, education, technical skills, and projects — and apply to job listings, while recruiters post jobs, browse applicants, and manage postings from a dedicated dashboard behind a subscription plan. A parallel content system — a blog, career-advice articles, and a candidate help centre, each with its own category/tag taxonomy — sits alongside the core job-board functionality.',
