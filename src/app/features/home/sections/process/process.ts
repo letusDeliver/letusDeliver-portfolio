@@ -14,11 +14,12 @@ interface Stage {
 })
 export class Process {
   protected readonly stages: Stage[] = [
-    { index: '01', label: 'Discover' },
-    { index: '02', label: 'Design' },
+    { index: '01', label: 'Understand' },
+    { index: '02', label: 'Architect' },
     { index: '03', label: 'Build' },
-    { index: '04', label: 'Validate' },
-    { index: '05', label: 'Deliver' },
-    { index: '06', label: 'Scale' },
+    { index: '04', label: 'Test' },
+    { index: '05', label: 'Review' },
+    { index: '06', label: 'Deploy' },
+    { index: '07', label: 'Improve' },
   ];
 }

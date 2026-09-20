@@ -1,0 +1,45 @@
+<section class="border-t border-border bg-surface/40 py-20 sm:py-28">
+  <div class="container-page">
+    <app-section-heading
+      eyebrow="Together"
+      heading="Different strengths. One engineering team."
+      description="Kunal and Mrityunjay don't split their work by seniority or convenience — they split it by what each of them is genuinely best at, and cover the rest of the product together."
+      align="center"
+    />
+
+    <div class="mx-auto mt-14 grid max-w-4xl gap-6 sm:grid-cols-2">
+      <div appReveal class="rounded-2xl border border-border bg-surface p-8">
+        <h3 class="font-display text-lg font-semibold text-primary-text">{{ kunal.name }}</h3>
+        <p class="mt-1 text-sm font-medium text-accent-bright">{{ kunal.role }}</p>
+        <ul class="mt-6 space-y-4">
+          @for (stage of kunal.buildingLetusdeliver.stages; track stage) {
+            <li class="flex items-center gap-3 border-l-2 border-border pl-4 text-sm text-secondary-text">
+              <span class="-ml-[1.4rem] h-2 w-2 flex-none rounded-full bg-accent-bright"></span>
+              {{ stage }}
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div appReveal [appRevealDelay]="90" class="rounded-2xl border border-border bg-surface p-8">
+        <h3 class="font-display text-lg font-semibold text-primary-text">{{ mrityunjay.name }}</h3>
+        <p class="mt-1 text-sm font-medium text-accent-bright">{{ mrityunjay.role }}</p>
+        <ul class="mt-6 space-y-4">
+          @for (stage of mrityunjay.buildingLetusdeliver.stages; track stage) {
+            <li class="flex items-center gap-3 border-l-2 border-border pl-4 text-sm text-secondary-text">
+              <span class="-ml-[1.4rem] h-2 w-2 flex-none rounded-full bg-accent-bright"></span>
+              {{ stage }}
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div appReveal [appRevealDelay]="160" class="mx-auto mt-8 flex max-w-4xl flex-col items-center">
+      <div class="h-8 w-px bg-border" aria-hidden="true"></div>
+      <span class="rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-bright">
+        Full product delivery
+      </span>
+    </div>
+  </div>
+</section>

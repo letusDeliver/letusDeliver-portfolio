@@ -30,6 +30,21 @@
   </div>
 </section>
 
+<section class="border-t border-border py-16 sm:py-20">
+  <div class="container-page">
+    <app-section-heading eyebrow="Principles" heading="How we make decisions." />
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (principle of principles; track principle.title; let i = $index) {
+        <div appReveal [appRevealDelay]="i * 60" class="rounded-2xl border border-border bg-surface p-6">
+          <h3 class="font-display text-base font-semibold text-primary-text">{{ principle.title }}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ principle.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
 <section class="border-t border-border bg-surface/40 py-16 sm:py-20">
   <div class="container-page">
     <app-section-heading eyebrow="Founders" heading="The founders." />

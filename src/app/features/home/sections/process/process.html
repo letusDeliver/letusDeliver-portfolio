@@ -1,6 +1,11 @@
 <section class="py-20 sm:py-28">
   <div class="container-page">
-    <app-section-heading eyebrow="How we work" heading="From idea to production." align="center" />
+    <app-section-heading
+      eyebrow="How we engineer"
+      heading="We don't just start coding."
+      description="Every stage — including the ones after launch — gets deliberate attention, not just the build."
+      align="center"
+    />
 
     <div class="relative mx-auto mt-16 max-w-5xl">
       <div class="absolute left-1/2 top-6 hidden h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent sm:block">
@@ -10,7 +15,7 @@
         ></span>
       </div>
 
-      <div class="grid gap-10 sm:grid-cols-3 lg:grid-cols-6">
+      <div class="grid gap-10 sm:grid-cols-4 lg:grid-cols-7">
         @for (stage of stages; track stage.index; let i = $index) {
           <div appReveal [appRevealDelay]="i * 90" class="relative flex flex-col items-center text-center sm:items-start sm:text-left">
             <div class="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-accent/50 bg-surface font-display text-sm font-semibold text-accent-bright">

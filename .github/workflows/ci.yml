@@ -42,6 +42,29 @@ jobs:
       - name: Build (SSR + prerender)
         run: npm run build
 
+  # Runs on every push/PR for visibility, but deliberately does NOT gate
+  # `deploy` below (see that job's comment) — the "submits successfully"
+  # spec depends on the real Django contact-form backend, which only ever
+  # runs on the developer's own machine (see CLAUDE.md's "Contact form
+  # backend" section) and is never reachable from a GitHub-hosted runner.
+  # That one spec is expected to fail here; a real regression will still
+  # show up as an *additional* failure and should be investigated.
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (SSR + prerender)
+        run: npm run build
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
@@ -56,6 +79,9 @@ jobs:
           retention-days: 7
 
   deploy:
+    # Intentionally depends only on lint/unit-test/build passing, not on
+    # the e2e job — see that job's comment for why it's expected to fail
+    # in this environment regardless of whether the app itself is healthy.
     needs: build-and-test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest

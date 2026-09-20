@@ -22,6 +22,10 @@ export const routes: Routes = [
     loadChildren: () => import('./features/insights/insights.routes').then((m) => m.INSIGHTS_ROUTES),
   },
   {
+    path: 'careers',
+    loadChildren: () => import('./features/careers/careers.routes').then((m) => m.CAREERS_ROUTES),
+  },
+  {
     path: 'start-a-project',
     loadChildren: () => import('./features/start-project/start-project.routes').then((m) => m.START_PROJECT_ROUTES),
   },

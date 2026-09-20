@@ -9,7 +9,7 @@
   ></div>
 
   <div class="container-page relative py-16">
-    <div class="flex flex-col gap-12 sm:flex-row sm:items-start sm:gap-20">
+    <div class="flex flex-col gap-12 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
       <div class="max-w-xs">
         <a
           routerLink="/"
@@ -23,10 +23,10 @@
         <p class="mt-5 font-display text-xs font-semibold uppercase tracking-[0.3em] text-muted-text">{{ brandTagline }}</p>
       </div>
 
-      <div class="flex flex-wrap gap-x-16 gap-y-10">
-        <div>
+      <div class="flex flex-col gap-y-10 sm:items-end">
+        <div class="sm:text-right">
           <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">Site</h3>
-          <ul class="mt-4 space-y-3">
+          <ul class="mt-4 flex flex-wrap gap-x-8 gap-y-3 sm:justify-end">
             @for (link of links; track link.path) {
               <li>
                 <a
@@ -44,9 +44,9 @@
         </div>
 
         @if (socialLinks.length) {
-          <div>
+          <div class="sm:text-right">
             <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">Elsewhere</h3>
-            <ul class="mt-4 space-y-3">
+            <ul class="mt-4 flex flex-wrap gap-x-8 gap-y-3 sm:justify-end">
               @for (item of socialLinks; track item.key) {
                 <li>
                   <a

@@ -28,6 +28,7 @@ export class Footer {
     { label: 'Services', path: '/services' },
     { label: 'About', path: '/about' },
     { label: 'Insights', path: '/insights' },
+    { label: 'Careers', path: '/careers' },
     { label: 'Start a Project', path: '/start-a-project' },
   ];
 

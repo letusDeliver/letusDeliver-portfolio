@@ -1,0 +1,35 @@
+<section class="border-t border-border bg-surface/40 py-20 sm:py-28">
+  <div class="container-page max-w-4xl">
+    <app-section-heading
+      eyebrow="AI-powered engineering"
+      heading="AI accelerates the work. Engineers own the outcome."
+      description="We use AI coding agents as a working practice, not a novelty — but architecture, product decisions and quality are always a human call, not something we hand off to a model."
+    />
+
+    <div class="mt-14 grid gap-8 sm:grid-cols-2">
+      <div appReveal>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">Already how we work</h3>
+        <ul class="mt-4 space-y-3">
+          @for (item of established; track item) {
+            <li class="flex gap-3 text-sm text-secondary-text">
+              <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-accent-bright"></span>
+              <span>{{ item }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div appReveal [appRevealDelay]="80">
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-muted-text">Actively exploring</h3>
+        <ul class="mt-4 space-y-3">
+          @for (item of exploring; track item) {
+            <li class="flex gap-3 text-sm text-secondary-text">
+              <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full border border-accent-bright"></span>
+              <span>{{ item }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

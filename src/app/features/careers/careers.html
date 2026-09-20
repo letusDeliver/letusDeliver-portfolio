@@ -1,0 +1,34 @@
+<section class="py-20 sm:py-28">
+  <div class="container-page max-w-3xl">
+    <app-section-heading
+      eyebrow="Careers"
+      heading="We're building a small, engineering-first company."
+      description="letusdeliver is founder-led and intentionally small today. We'd rather grow slowly with the right engineers than fill seats quickly."
+    />
+
+    <div appReveal class="mt-14 rounded-2xl border border-border bg-surface p-8 text-center">
+      <h2 class="font-display text-xl font-semibold text-primary-text">No current openings</h2>
+      <p class="mx-auto mt-2 max-w-md text-secondary-text">
+        But we're always interested in hearing from great engineers — especially ones who care about architecture, ownership and shipping real software.
+      </p>
+    </div>
+
+    <div appReveal [appRevealDelay]="80" class="mt-14">
+      <h2 class="font-display text-lg font-semibold text-primary-text">Roles we'd likely hire for</h2>
+      <p class="mt-2 text-sm text-secondary-text">Not open positions — just where we'd expect to grow first, if and when we do.</p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        @for (role of futureRoles; track role) {
+          <app-tag>{{ role }}</app-tag>
+        }
+      </div>
+    </div>
+
+    <div appReveal [appRevealDelay]="140" class="mt-16 rounded-2xl border border-border bg-surface p-8 text-center">
+      <h2 class="font-display text-xl font-semibold text-primary-text">Want to get on our radar?</h2>
+      <p class="mt-2 text-secondary-text">Tell us a bit about yourself and what you're interested in working on.</p>
+      <div class="mt-6 flex justify-center">
+        <app-button link="/start-a-project">Get in touch <span class="btn-arrow">→</span></app-button>
+      </div>
+    </div>
+  </div>
+</section>

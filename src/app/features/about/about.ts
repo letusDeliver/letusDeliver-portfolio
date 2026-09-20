@@ -11,6 +11,11 @@ interface CapabilityGroup {
   description: string;
 }
 
+interface Principle {
+  title: string;
+  description: string;
+}
+
 @Component({
   selector: 'app-about',
   imports: [RouterLink, SectionHeading, Button, Reveal],
@@ -25,6 +30,14 @@ export class About {
     { title: 'Backend', description: 'Node.js/Express and Python (FastAPI, Django) APIs, authentication and data modeling.' },
     { title: 'Cloud', description: 'GCP and AWS data services, CI/CD pipelines, and containerized deployments.' },
     { title: 'Data', description: 'ETL pipelines and workflow automation built on Airflow and Pandas.' },
+  ];
+
+  protected readonly principles: Principle[] = [
+    { title: 'Build with purpose', description: 'Technology should solve a meaningful business problem — not add complexity for its own sake.' },
+    { title: 'Engineering quality', description: 'Architecture, security, maintainability and scalability matter from the first commit, not after something breaks.' },
+    { title: 'Transparency', description: "You should always understand what's being built and why — no black boxes, no surprise scope." },
+    { title: 'Deliver continuously', description: 'Small, validated releases beat long stretches of silence followed by one big reveal.' },
+    { title: 'AI-assisted, human-driven', description: 'AI accelerates the engineering work. Architecture, product decisions and quality stay a human responsibility.' },
   ];
 
   constructor() {

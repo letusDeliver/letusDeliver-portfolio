@@ -29,6 +29,7 @@ export class Header {
     { label: 'Services', path: '/services' },
     { label: 'About', path: '/about' },
     { label: 'Insights', path: '/insights' },
+    { label: 'Careers', path: '/careers' },
   ];
 
   constructor() {

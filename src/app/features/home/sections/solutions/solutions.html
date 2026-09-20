@@ -1,0 +1,24 @@
+<section class="border-t border-border py-20 sm:py-28">
+  <div class="container-page">
+    <app-section-heading
+      eyebrow="Solutions"
+      heading="Solutions we build."
+      description="The same engineering, applied to the problems businesses actually have — not just the technologies behind them."
+    />
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2">
+      @for (solution of solutions; track solution.title; let i = $index) {
+        <div appReveal [appRevealDelay]="i * 70" class="card-interactive rounded-2xl border border-border bg-elevated p-7">
+          <div class="h-1 w-10 rounded-full bg-accent-bright" aria-hidden="true"></div>
+          <h3 class="mt-5 font-display text-lg font-semibold text-primary-text">{{ solution.title }}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ solution.description }}</p>
+          <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-1.5">
+            @for (example of solution.examples; track example) {
+              <li class="text-xs text-muted-text">{{ example }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

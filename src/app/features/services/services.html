@@ -8,6 +8,22 @@
   </div>
 </section>
 
+<section class="border-t border-border bg-surface/40 py-16 sm:py-20">
+  <div class="container-page">
+    <app-section-heading eyebrow="How we deliver" heading="We own the engineering journey, not just the code." align="center" />
+
+    <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      @for (stage of deliveryProcess; track stage.index; let i = $index) {
+        <div appReveal [appRevealDelay]="i * 70">
+          <p class="font-display text-2xl font-semibold text-accent-bright">{{ stage.index }}</p>
+          <h3 class="mt-2 font-display text-base font-semibold text-primary-text">{{ stage.label }}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-secondary-text">{{ stage.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
 <div class="divide-y divide-border border-t border-border">
   @for (service of services; track service.slug; let i = $index) {
     <section [id]="service.slug" class="scroll-mt-24 py-16 sm:py-20">

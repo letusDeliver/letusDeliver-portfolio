@@ -4,11 +4,14 @@ import { organizationSchema, websiteSchema } from '../../core/seo/structured-dat
 import { Hero } from './sections/hero/hero';
 import { Credibility } from './sections/credibility/credibility';
 import { ServicesOverview } from './sections/services-overview/services-overview';
+import { Solutions } from './sections/solutions/solutions';
 import { FeaturedWork } from './sections/featured-work/featured-work';
 import { Philosophy } from './sections/philosophy/philosophy';
 import { WhyUs } from './sections/why-us/why-us';
 import { Process } from './sections/process/process';
+import { AiEngineering } from './sections/ai-engineering/ai-engineering';
 import { FoundersPreview } from './sections/founders-preview/founders-preview';
+import { FoundersComplementary } from './sections/founders-complementary/founders-complementary';
 import { Technology } from './sections/technology/technology';
 import { InsightsPreview } from './sections/insights-preview/insights-preview';
 import { FinalCta } from './sections/final-cta/final-cta';
@@ -19,11 +22,14 @@ import { FinalCta } from './sections/final-cta/final-cta';
     Hero,
     Credibility,
     ServicesOverview,
+    Solutions,
     FeaturedWork,
     Philosophy,
     WhyUs,
     Process,
+    AiEngineering,
     FoundersPreview,
+    FoundersComplementary,
     Technology,
     InsightsPreview,
     FinalCta,
