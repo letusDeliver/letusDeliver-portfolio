@@ -20,6 +20,7 @@
 
       @if (project.imageUrl) {
         <img
+          appReveal
           [src]="project.imageUrl"
           [alt]="project.imageAlt ?? ''"
           class="mt-8 w-full rounded-2xl border border-border object-cover object-top shadow-card"
@@ -41,7 +42,7 @@
       @if (project.demoUrl || project.githubUrl) {
         <div class="mt-8 flex flex-wrap gap-3">
           @if (project.demoUrl) {
-            <app-button [href]="project.demoUrl" [external]="true" (click)="onDemoClick()">View Demo →</app-button>
+            <app-button [href]="project.demoUrl" [external]="true" (click)="onDemoClick()">View Demo <span class="btn-arrow">→</span></app-button>
           }
           @if (project.githubUrl) {
             <app-button variant="secondary" [href]="project.githubUrl" [external]="true" (click)="onGithubClick()">View on GitHub</app-button>
@@ -110,8 +111,8 @@
       @if (nextProject(); as next) {
         <div class="mt-16 border-t border-border pt-8">
           <p class="text-xs font-semibold uppercase tracking-wider text-muted-text">Next project</p>
-          <a [routerLink]="['/work', next.slug]" class="mt-2 inline-flex items-center font-display text-lg font-semibold text-primary-text hover:text-accent-bright">
-            {{ next.title }} →
+          <a [routerLink]="['/work', next.slug]" class="mt-2 inline-flex items-center gap-1.5 font-display text-lg font-semibold text-primary-text transition-colors hover:text-accent-bright">
+            {{ next.title }} <span class="btn-arrow">→</span>
           </a>
         </div>
       }

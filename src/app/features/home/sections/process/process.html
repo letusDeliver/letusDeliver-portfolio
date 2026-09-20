@@ -3,7 +3,12 @@
     <app-section-heading eyebrow="How we work" heading="From idea to production." align="center" />
 
     <div class="relative mx-auto mt-16 max-w-5xl">
-      <div class="absolute left-1/2 top-6 hidden h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent sm:block"></div>
+      <div class="absolute left-1/2 top-6 hidden h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent sm:block">
+        <span
+          class="path-pulse h-1.5 w-1.5 rounded-full bg-accent-bright shadow-glow"
+          aria-hidden="true"
+        ></span>
+      </div>
 
       <div class="grid gap-10 sm:grid-cols-3 lg:grid-cols-6">
         @for (stage of stages; track stage.index; let i = $index) {

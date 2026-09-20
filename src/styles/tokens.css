@@ -43,6 +43,20 @@
 }
 
 /**
+ * Motion tokens — plain custom properties, deliberately outside `@theme`
+ * (they're consumed directly via `var()` in animations.css/component
+ * templates, not meant to generate Tailwind `duration-*`/`ease-*`
+ * utilities). One easing curve, reused everywhere: `--ease-premium` is the
+ * exact cubic-bezier `reveal-up` already used before this was a token.
+ */
+:root {
+  --motion-micro: 180ms;
+  --motion-standard: 300ms;
+  --motion-major: 600ms;
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/**
  * Light theme overrides. Every value here was measured with the same
  * relative-luminance/contrast-ratio method as the dark theme (see
  * PROGRESS.md for the full table) — this is not "invert the dark

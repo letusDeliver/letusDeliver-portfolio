@@ -6,7 +6,7 @@
         heading="What we've built."
         description="A selection of products and engineering projects showcasing how we approach software."
       />
-      <app-button variant="secondary" link="/work">View all work →</app-button>
+      <app-button variant="secondary" link="/work">View all work <span class="btn-arrow">→</span></app-button>
     </div>
 
     <div class="mt-14 grid gap-6 lg:grid-cols-3">
@@ -15,15 +15,24 @@
           appReveal
           [appRevealDelay]="i * 80"
           [routerLink]="['/work', project.slug]"
-          class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-colors hover:border-accent/50"
+          class="card-interactive group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-colors hover:border-accent/50"
         >
-          <div class="relative flex h-40 items-center justify-center overflow-hidden bg-elevated" aria-hidden="true">
-            <div class="absolute inset-0 bg-gradient-to-br from-accent/25 via-transparent to-transparent"></div>
-            <div class="grid grid-cols-6 gap-2 opacity-40">
-              @for (dot of [1,2,3,4,5,6,7,8,9,10,11,12]; track dot) {
-                <span class="h-1.5 w-1.5 rounded-full bg-accent-bright"></span>
-              }
-            </div>
+          <div class="relative flex h-40 items-center justify-center overflow-hidden bg-elevated">
+            @if (project.imageUrl) {
+              <img
+                [src]="project.imageUrl"
+                [alt]="project.imageAlt ?? ''"
+                class="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+                loading="lazy"
+              />
+            } @else {
+              <div class="absolute inset-0 bg-gradient-to-br from-accent/25 via-transparent to-transparent" aria-hidden="true"></div>
+              <div class="grid grid-cols-6 gap-2 opacity-40" aria-hidden="true">
+                @for (dot of [1,2,3,4,5,6,7,8,9,10,11,12]; track dot) {
+                  <span class="h-1.5 w-1.5 rounded-full bg-accent-bright"></span>
+                }
+              </div>
+            }
           </div>
 
           <div class="flex flex-1 flex-col p-6">
@@ -45,7 +54,7 @@
             </div>
 
             <span class="mt-5 inline-flex items-center text-sm font-medium text-accent-bright">
-              View Project →
+              View Project <span class="btn-arrow">→</span>
             </span>
           </div>
         </a>

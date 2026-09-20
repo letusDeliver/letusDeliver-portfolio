@@ -4,6 +4,7 @@ import { SeoService } from '../../../core/seo/seo.service';
 import { AnalyticsService } from '../../../core/services/analytics.service';
 import { Tag } from '../../../shared/ui/tag/tag';
 import { Button } from '../../../shared/ui/button/button';
+import { Reveal } from '../../../shared/directives/reveal';
 import { PROJECTS } from '../../../core/data';
 import { siteConfig } from '../../../core/config/site.config';
 
@@ -15,7 +16,7 @@ const OWNERSHIP_LABEL: Record<string, string> = {
 
 @Component({
   selector: 'app-work-detail',
-  imports: [RouterLink, Tag, Button],
+  imports: [RouterLink, Tag, Button, Reveal],
   templateUrl: './work-detail.html',
 })
 export class WorkDetail {

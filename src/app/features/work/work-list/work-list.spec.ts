@@ -27,14 +27,15 @@ describe('WorkList', () => {
     expect(component.filteredProjects().every((p) => p.category === 'Cloud')).toBe(true);
   });
 
-  it('never labels professional-experience projects as letusdeliver work', () => {
+  it('never labels professional-experience or personal projects as letusdeliver work', () => {
+    // Tests the ownershipLabel mapping directly rather than depending on
+    // the live PROJECTS data currently containing a professional-experience
+    // entry — that's content, not behavior, and content changes over time
+    // (there are none in the data right now).
     const fixture = TestBed.createComponent(WorkList);
     const component = fixture.componentInstance;
 
-    const professionalExperienceProjects = component.projects.filter((p) => p.ownershipType === 'professional-experience');
-    expect(professionalExperienceProjects.length).toBeGreaterThan(0);
-    for (const project of professionalExperienceProjects) {
-      expect(component.ownershipLabel(project.ownershipType)).not.toBe('letusdeliver');
-    }
+    expect(component.ownershipLabel('professional-experience')).not.toBe('letusdeliver');
+    expect(component.ownershipLabel('personal')).not.toBe('letusdeliver');
   });
 });

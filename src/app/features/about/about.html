@@ -40,7 +40,7 @@
           appReveal
           [appRevealDelay]="i * 90"
           [routerLink]="['/about', founder.slug]"
-          class="group flex flex-col gap-5 rounded-2xl border border-border bg-surface p-8 shadow-card transition-colors hover:border-accent/50 sm:flex-row sm:items-start"
+          class="card-interactive group flex flex-col gap-5 rounded-2xl border border-border bg-surface p-8 shadow-card transition-colors hover:border-accent/50 sm:flex-row sm:items-start"
         >
           <div class="flex-none">
             @if (founder.photoUrl) {
@@ -62,7 +62,7 @@
             <p class="mt-1 text-sm font-medium text-accent-bright">{{ founder.role }}</p>
             <p class="mt-4 text-sm leading-relaxed text-secondary-text">{{ founder.summary }}</p>
             <span class="mt-5 inline-flex items-center text-sm font-medium text-primary-text opacity-0 transition-opacity group-hover:opacity-100">
-              Full profile →
+              Full profile <span class="btn-arrow">→</span>
             </span>
           </div>
         </a>
@@ -91,7 +91,7 @@
     <h2 class="text-fluid-display font-display font-semibold text-primary-text">Have a project in mind?</h2>
     <p class="mx-auto mt-4 max-w-xl text-secondary-text">Tell us what you're building. We'll figure out the engineering.</p>
     <div class="mt-8 flex justify-center">
-      <app-button link="/start-a-project" size="lg">Start a Project →</app-button>
+      <app-button link="/start-a-project" size="lg">Start a Project <span class="btn-arrow">→</span></app-button>
     </div>
   </div>
 </section>

@@ -167,7 +167,11 @@
         }
 
         <app-button type="submit" size="lg" [disabled]="submitting()">
-          {{ submitting() ? 'Sending…' : 'Start the Conversation →' }}
+          @if (submitting()) {
+            Sending…
+          } @else {
+            Start the Conversation <span class="btn-arrow">→</span>
+          }
         </app-button>
       </form>
     }

@@ -30,14 +30,14 @@
           appReveal
           [appRevealDelay]="(i % 3) * 70"
           [routerLink]="['/work', project.slug]"
-          class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-colors hover:border-accent/50"
+          class="card-interactive group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-colors hover:border-accent/50"
         >
           <div class="relative flex h-32 items-center justify-center overflow-hidden bg-elevated">
             @if (project.imageUrl) {
               <img
                 [src]="project.imageUrl"
                 [alt]="project.imageAlt ?? ''"
-                class="h-full w-full object-cover object-top"
+                class="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
                 [attr.loading]="i < 3 ? 'eager' : 'lazy'"
                 [attr.fetchpriority]="i < 3 ? 'high' : null"
               />

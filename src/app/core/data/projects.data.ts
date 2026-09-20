@@ -26,8 +26,6 @@ export const PROJECTS: Project[] = [
     featured: true,
     ownershipType: 'personal',
     githubUrl: 'https://github.com/letusDeliver/multi-app-architecture-system',
-    imageUrl: '/images/work/enterprise-micro-frontend-shell.jpg',
-    imageAlt: 'The Platform Shell running with the hello-world-app remote mounted via Native Federation, demonstrating the shell theme, a shell-mediated notify/confirm call, and a dynamically registered header action.',
     overview:
       'An Angular 21 platform shell that hosts independently built and deployed applications behind one consistent experience, composing them at runtime via Native Federation rather than compiling their code into the shell\'s own build.',
     challenge:
@@ -233,17 +231,6 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    slug: 'personal-portfolio',
-    title: 'Personal Portfolio',
-    category: 'Product',
-    summary: 'A personal portfolio site built with Angular and the Angular Router.',
-    description: 'Personal portfolio site built with Angular and the Angular Router to showcase projects and background.',
-    technologies: ['Angular', 'Angular Router'],
-    featured: false,
-    ownershipType: 'personal',
-    overview: 'A personal portfolio site built with Angular and the Angular Router to showcase projects and background.',
-  },
-  {
     slug: 'careernaukri',
     title: 'CareerNaukri',
     category: 'Full Stack',
@@ -276,35 +263,5 @@ export const PROJECTS: Project[] = [
       'A single custom User model carrying a `role` field rather than separate Candidate/Recruiter models or Django groups — simpler at this scale, at the cost of nullable recruiter-only fields on every candidate row and vice versa.',
       "Recruiter subscription enrollment handled inside an overridden `User.save()` (auto-assigning a Basic plan the first time a recruiter row is saved) rather than a separate signup-flow step — guarantees every recruiter has an active plan row, at the cost of coupling billing logic into the user model's persistence layer.",
     ],
-  },
-  {
-    slug: 'enterprise-data-pipelines',
-    title: 'Enterprise Data Pipelines',
-    category: 'Cloud',
-    summary: 'Cloud-native ETL pipelines on GCP for data movement, transformation and persistence.',
-    description:
-      'Data engineering work delivered as part of professional employment — shown as evidence of engineering capability, not a LetUsDeliver engagement.',
-    technologies: ['Python', 'BigQuery', 'Cloud Storage', 'Apache Airflow', 'Pandas'],
-    featured: false,
-    ownershipType: 'professional-experience',
-    contextLabel: 'Professional experience',
-    overview:
-      'Cloud-native ETL solutions on GCP automating data movement, transformation and persistence, with Python/Pandas components for data cleansing and validation.',
-    solution:
-      'Apache Airflow orchestrates scheduling and dependency management across pipeline tasks, with Pandas-based components handling data cleansing and validation.',
-  },
-  {
-    slug: 'full-stack-product-applications',
-    title: 'Full-Stack Product Applications',
-    category: 'Full Stack',
-    summary: '20+ end-to-end backend systems delivered across diverse product domains.',
-    description:
-      'Backend engineering delivered for employer clients across multiple domains — shown as evidence of range and delivery experience, not LetUsDeliver client work.',
-    technologies: ['Python', 'Django', 'Django REST Framework', 'Flask', 'PostgreSQL', 'MySQL', 'Docker'],
-    featured: false,
-    ownershipType: 'professional-experience',
-    contextLabel: 'Professional experience — Toxsl Technologies',
-    overview:
-      'Architected and delivered 20+ end-to-end backend systems across diverse domains — including bus booking, social media, gym management, payment gateway integration, and event planning — implementing REST APIs, database design, auth flows and third-party integrations for each.',
   },
 ];

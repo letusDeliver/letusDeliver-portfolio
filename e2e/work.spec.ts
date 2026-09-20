@@ -27,10 +27,4 @@ test.describe('Work navigation and project detail', () => {
     await expect(page.getByRole('heading', { name: 'Employee Management System' })).toBeVisible();
     await expect(page.getByText('Personal project')).toBeVisible();
   });
-
-  test('professional-experience projects are clearly labeled, not shown as letusdeliver work', async ({ page }) => {
-    await page.goto('/work/enterprise-data-pipelines');
-    await expect(page.getByText(/Professional experience/i).first()).toBeVisible();
-    await expect(page.getByText(/not a letusdeliver client engagement/i)).toBeVisible();
-  });
 });

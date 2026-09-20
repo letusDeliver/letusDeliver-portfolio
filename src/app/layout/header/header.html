@@ -17,8 +17,8 @@
       @for (link of links; track link.path) {
         <a
           [routerLink]="link.path"
-          routerLinkActive="text-primary-text"
-          class="text-sm font-medium text-secondary-text hover:text-primary-text transition-colors"
+          routerLinkActive="text-primary-text after:scale-x-100"
+          class="group relative py-1 text-sm font-medium text-secondary-text transition-colors hover:text-primary-text after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:rounded-full after:bg-accent-bright after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100"
         >
           {{ link.label }}
         </a>
@@ -44,7 +44,7 @@
         }
       </button>
       <app-button link="/start-a-project" size="md" (click)="onStartProjectClick()">
-        Start a Project →
+        Start a Project <span class="btn-arrow">→</span>
       </app-button>
     </div>
 
@@ -90,7 +90,7 @@
   @if (mobileMenuOpen()) {
     <div
       id="mobile-nav-panel"
-      class="md:hidden border-t border-border bg-background px-5 pb-6 pt-2"
+      class="menu-drop md:hidden origin-top border-t border-border bg-background px-5 pb-6 pt-2"
     >
       <nav aria-label="Mobile primary" class="flex flex-col gap-1">
         @for (link of links; track link.path) {
@@ -106,7 +106,7 @@
       </nav>
       <div class="mt-4">
         <app-button link="/start-a-project" size="lg" (click)="onStartProjectClick(); closeMenu()">
-          Start a Project →
+          Start a Project <span class="btn-arrow">→</span>
         </app-button>
       </div>
     </div>

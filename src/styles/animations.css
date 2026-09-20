@@ -29,12 +29,42 @@
   }
 }
 
+@keyframes menu-drop {
+  from {
+    opacity: 0;
+    transform: scaleY(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+@keyframes path-pulse {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  8%,
+  92% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
 .reveal {
   opacity: 0;
 }
 
 .reveal-in {
-  animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: reveal-up var(--motion-major) var(--ease-premium) forwards;
+}
+
+.menu-drop {
+  animation: menu-drop var(--motion-standard) var(--ease-premium) forwards;
 }
 
 .node-pulse {
@@ -44,6 +74,113 @@
 .path-flow {
   stroke-dasharray: 6 6;
   animation: path-flow 1.6s linear infinite;
+}
+
+/*
+ * A small glowing dot traveling left→right across its (relatively
+ * positioned) parent — e.g. the `process` section's connector line.
+ * Percentage-based `left`, not `offset-path`, deliberately: the parent's
+ * width is fluid/responsive, and `offset-path`'s coordinate syntax doesn't
+ * follow percentage-based layout. Purely decorative — `aria-hidden` at the
+ * call site — so it's safe to no-op under reduced motion instead of
+ * jumping to an end state.
+ */
+.path-pulse {
+  position: absolute;
+  top: 50%;
+  translate: -50% -50%;
+  animation: path-pulse 2.4s var(--ease-premium) infinite;
+}
+
+/*
+ * Card hover lift + glow. CSS-only — no JS, no per-component stylesheet.
+ * Combine with the existing `hover:border-accent/50` Tailwind utility
+ * already used inline; this only adds the transform + shadow.
+ */
+.card-interactive {
+  transition:
+    transform var(--motion-standard) var(--ease-premium),
+    box-shadow var(--motion-standard) var(--ease-premium);
+}
+
+.card-interactive:hover,
+.card-interactive:focus-within {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+/*
+ * Pointer-following highlight. The `--pointer-x`/`--pointer-y` custom
+ * properties are written by the `appPointerGlow` directive (raw DOM style
+ * mutation, rAF-throttled — never a signal write, so it never schedules
+ * Angular change detection). Directive no-ops on touch devices and under
+ * reduced motion, so `--pointer-x`/`--pointer-y` simply stay unset there
+ * and this stays fully transparent (`opacity: 0` at rest, never shown).
+ */
+.pointer-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.pointer-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    240px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+    color-mix(in srgb, var(--color-accent) 18%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--motion-standard) var(--ease-premium);
+  pointer-events: none;
+}
+
+.pointer-glow:hover::before {
+  opacity: 1;
+}
+
+/*
+ * Subtle ambient-glow drift — the hero's background orb nudges toward the
+ * pointer. `--pointer-dx`/`--pointer-dy` (from `appPointerGlow`, same
+ * directive as `.pointer-glow` above) are unitless -1..1; the long
+ * `transition` (not the JS) supplies the damped, springy feel, so the
+ * directive itself stays simple raw-value plumbing with no easing math.
+ *
+ * Bakes in a -50% X centering (`--orb-center-x`, default -50%) instead of
+ * pairing with Tailwind's `-translate-x-1/2` utility — both set the same
+ * `transform` property, so combining them at the class level (rather than
+ * composing) avoids one silently overriding the other.
+ */
+.ambient-orb {
+  transition: transform 0.6s var(--ease-premium);
+  transform: translate(calc(var(--orb-center-x, -50%) + var(--pointer-dx, 0) * 18px), calc(var(--pointer-dy, 0) * 18px));
+}
+
+/*
+ * Trailing-arrow nudge. An explicit opt-in class, not automatic on every
+ * button/link — wrap just the arrow glyph in `<span class="btn-arrow">`
+ * at the call site (e.g. `Start a Project <span class="btn-arrow">→</span>`)
+ * and its parent link/button's hover slides it, independent of the label
+ * text. No change needed to the shared Button component itself.
+ */
+.btn-arrow,
+.btn-arrow-down {
+  display: inline-block;
+  transition: transform var(--motion-micro) var(--ease-premium);
+}
+
+a:hover .btn-arrow,
+button:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Same idea as `.btn-arrow`, for a `↓` glyph — moves down, not sideways. */
+a:hover .btn-arrow-down,
+button:hover .btn-arrow-down {
+  transform: translateY(3px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -58,7 +195,13 @@
     opacity: 1;
   }
 
-  .path-flow {
+  .path-flow,
+  .path-pulse {
     animation: none;
+  }
+
+  .card-interactive:hover,
+  .card-interactive:focus-within {
+    transform: none;
   }
 }

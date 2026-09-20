@@ -1,41 +1,75 @@
 import { Founder } from '../models';
 
 /**
- * Founder facts are sourced directly from each founder's resume.
- * Do not add claims, metrics or technologies not present in the source
- * resumes. Contact details are intentionally omitted from public content —
- * the site routes inquiries through /start-a-project instead.
+ * Founder facts are sourced directly from each founder's resume (and, for
+ * Mrityunjay's philosophy/role framing, an updated bio supplied directly
+ * by him — see PROGRESS.md §21). Do not add claims, metrics or
+ * technologies not present in those sources. Contact details are
+ * intentionally omitted from public content — the site routes inquiries
+ * through /start-a-project instead. Client names from prior employment are
+ * omitted by policy (see §22) even where the source resume names one.
  */
 export const FOUNDERS: Founder[] = [
   {
     slug: 'kunal',
     name: 'Kunal',
-    role: 'Co-Founder · Full-Stack & Frontend Architect',
+    role: 'Co-Founder · Frontend & Product Engineering',
     yearsExperience: '4.5+ years',
     photoUrl: '/images/kunal-profile.jpg',
     summary:
-      'Senior Software Engineer with 4.5+ years of experience designing and building enterprise-scale web applications with Angular (v12–v21), TypeScript, RxJS and Signals. Deep expertise in component-driven and standalone architecture, reactive state patterns, performance optimization and accessibility (WCAG/ARIA), with production experience delivering PrimeNG- and Angular Material-based UI in Agile teams. Complements frontend depth with hands-on backend engineering (Node.js, Express, PostgreSQL/Prisma, JWT auth, RBAC) and enterprise micro-frontend architecture (Native Federation), built through self-directed, production-grade engineering projects.',
+      'Kunal leads frontend and product engineering at letusdeliver, with 4.5+ years building production-grade Angular applications and turning product requirements into scalable, maintainable software.',
     philosophy:
-      'Uses AI-assisted / agentic development workflows (Claude Code) as a working practice for codebase analysis, refactoring and documentation — not as a novelty, but as a lever for engineering velocity and quality. Experienced mentoring developers and owning features end-to-end.',
+      'Starts from the problem, not the framework — architecture should be exactly as complex as the product needs and no more. Favors component boundaries and state patterns that stay maintainable as a codebase grows, treats accessibility and performance as part of the definition of done rather than a later pass, and uses AI-assisted, agent-driven workflows (Claude Code) as a working practice for codebase analysis, refactoring and documentation — a lever for velocity and quality, not a shortcut around engineering judgment.',
     expertise: [
-      'Angular standalone & component-driven architecture',
-      'Signal-based reactive state',
-      'Frontend performance optimization',
-      'Accessibility (WCAG/ARIA)',
-      'Micro-frontend architecture (Native Federation)',
-      'Backend & API engineering (Node.js, Express, PostgreSQL)',
+      {
+        title: 'Frontend Engineering',
+        description: 'Angular, TypeScript, RxJS and Signals, applied to enterprise-scale, standalone-architecture applications.',
+      },
+      {
+        title: 'Product Engineering',
+        description: 'Turns product and business requirements into usable, scalable production applications — not just implemented tickets.',
+      },
+      {
+        title: 'Application Architecture',
+        description: 'Component-driven and micro-frontend architecture (Native Federation), reusable systems, and API-integrated frontends built to stay maintainable as they grow.',
+      },
+      {
+        title: 'Enterprise Engineering',
+        description: 'Complex workflows, dashboards, forms and permission-driven applications, delivered in Agile teams.',
+      },
+      {
+        title: 'AI-Assisted Engineering',
+        description: 'AI coding agents (Claude Code) for codebase analysis, refactoring, documentation and accelerated delivery — a working practice, not a novelty.',
+      },
+      {
+        title: 'Full-Stack Development',
+        description: 'Backend and API engineering with Node.js, Express, PostgreSQL and Prisma — enough range to own a feature end to end.',
+      },
+      {
+        title: 'Accessibility & Performance',
+        description: 'WCAG/ARIA conformance and frontend performance optimization treated as core engineering quality, not an afterthought.',
+      },
     ],
+    roleAtLetusdeliver:
+      "As co-founder, Kunal owns frontend architecture and product engineering at letusdeliver — translating product requirements into application architecture, leading Angular development and UI engineering, and setting the frontend standards the team builds against. That includes reusable component systems, accessibility and performance as first-class requirements, and folding AI-assisted development into the day-to-day engineering workflow rather than treating it as a separate experiment.",
+    buildingLetusdeliver: {
+      stages: ['Product', 'Frontend', 'Application Architecture', 'AI-assisted Engineering'],
+      description:
+        "Kunal's focus at letusdeliver runs from product requirements through to shipped interface — frontend architecture, reusable systems and AI-assisted workflows that keep delivery fast without cutting corners.",
+    },
     technologies: [
       {
         category: 'Frontend',
-        items: ['Angular (v12–v21)', 'TypeScript', 'JavaScript (ES6+)', 'RxJS', 'Signals', 'HTML5', 'CSS3', 'Bootstrap'],
+        items: ['Angular (v12–v21)', 'TypeScript', 'JavaScript (ES6+)', 'RxJS', 'Signals', 'HTML5', 'CSS3'],
       },
-      { category: 'UI Libraries', items: ['PrimeNG', 'Angular Material', 'Tailwind CSS'] },
+      { category: 'UI & Styling', items: ['PrimeNG', 'Angular Material', 'Bootstrap', 'Tailwind CSS'] },
       {
-        category: 'Architecture & Patterns',
+        category: 'Architecture',
         items: [
           'Standalone APIs',
           'Component-Based Architecture',
+          'Micro-Frontends (Native Federation)',
+          'Signal-Based State',
           'Reactive & Template-Driven Forms',
           'Lazy Loading',
           'Route Guards',
@@ -43,8 +77,6 @@ export const FOUNDERS: Founder[] = [
           'OnPush Change Detection',
           'Dependency Injection',
           'Custom Directives & Pipes',
-          'Micro-Frontends (Native Federation)',
-          'Signal-Based State',
           'Basic NgRx',
         ],
       },
@@ -65,8 +97,8 @@ export const FOUNDERS: Founder[] = [
         organization: 'Nuage Biztech',
         period: 'Sep 2025 – Present',
         highlights: [
-          'Developing enterprise applications using Angular standalone architecture and modern frontend engineering practices.',
-          'Implemented accessibility improvements using semantic HTML and ARIA, raising WCAG conformance across application modules.',
+          'Develops enterprise applications using Angular standalone architecture and modern frontend engineering practices.',
+          'Raised WCAG conformance across application modules through semantic HTML and ARIA improvements.',
           'Built reusable Angular and PrimeNG components, reducing duplicated UI logic and improving maintainability across modules.',
           'Mentors junior developers and contributes to feature planning, code review, and sprint delivery.',
         ],
@@ -87,7 +119,7 @@ export const FOUNDERS: Founder[] = [
         organization: 'Triazine Software',
         period: 'Dec 2023 – Nov 2024',
         highlights: [
-          'Developed Angular applications and profiled rendering/change-detection behavior to identify performance bottlenecks.',
+          'Profiled rendering and change-detection behavior in Angular applications to identify performance bottlenecks.',
           'Improved page performance by approximately 20% through targeted optimization (lazy loading, OnPush strategy, bundle size reduction).',
           'Built dynamic, schema-driven forms and reusable components adopted across multiple application modules.',
         ],
@@ -108,7 +140,6 @@ export const FOUNDERS: Founder[] = [
       'employee-management-system',
       'multi-tenant-hospital-management-system',
       'donezo',
-      'personal-portfolio',
     ],
     certifications: [
       { name: 'Angular', issuer: 'Sololearn', date: 'Aug 2025' },
@@ -125,40 +156,67 @@ export const FOUNDERS: Founder[] = [
   {
     slug: 'mrityunjay',
     name: 'Mrityunjay',
-    role: 'Co-Founder · Python & Cloud Engineer',
+    role: 'Co-Founder · Backend, Cloud & Data Engineering',
     yearsExperience: '4+ years',
     photoUrl: '/images/mrityunjay-profile.jpg',
     summary:
-      'Senior Python Backend Engineer with 4+ years of experience architecting scalable backend services, REST APIs, cloud-native data platforms and CI/CD pipelines across 20+ production projects. Core strengths in API design, database optimization, cloud data processing, production reliability, Docker containerization and secure CI/CD delivery.',
+      'Mrityunjay leads backend, cloud and data engineering at letusdeliver, with 4+ years designing production-grade backend systems, cloud infrastructure and data platforms that let products run reliably and scale.',
     philosophy:
-      'Currently engineering enterprise backend and cloud services for The Home Depot (via Insight Global), building Python/FastAPI services on GCP with BigQuery, Cloud Storage and Datastore.',
+      'Believes reliable software is built on strong foundations — good APIs, thoughtful data models, automated deployments, observable systems and clear architecture are what let products grow without becoming difficult to maintain. Looks beyond individual backend features to the engineering systems behind the product: architecture → infrastructure → data → reliability → scale. Also exploring how AI can extend beyond code generation into requirement analysis, test generation, debugging, documentation and infrastructure automation — pairing experienced engineering judgment with AI-assisted workflows to reduce repetitive work and speed up delivery.',
     expertise: [
-      'Python backend engineering (FastAPI, Django, Flask)',
-      'Cloud-native data platforms (GCP: BigQuery, Cloud Storage, Datastore)',
-      'REST API design & database optimization',
-      'CI/CD pipelines (GitHub Actions, Jenkins) & Docker containerization',
-      'ETL & data processing (Apache Airflow, Pandas)',
-      'Production reliability & incident response',
+      {
+        title: 'Backend Engineering',
+        description: 'Python, FastAPI, Django and Flask, architected as REST APIs and services built to stay maintainable in production.',
+      },
+      {
+        title: 'Cloud Engineering',
+        description: 'GCP and AWS, building cloud-native services around BigQuery, Cloud Storage and Datastore.',
+      },
+      {
+        title: 'Data Engineering',
+        description: 'Apache Airflow, Pandas and ETL pipelines that turn manual data operations into reliable, automated workflows.',
+      },
+      {
+        title: 'Database Engineering',
+        description: 'PostgreSQL, MySQL, MongoDB and Neo4j, with a focus on schema design, indexing and query performance.',
+      },
+      {
+        title: 'DevOps & CI/CD',
+        description: 'Docker, GitHub Actions and Jenkins, automating build, security scanning and deployment workflows.',
+      },
+      {
+        title: 'Production Reliability',
+        description: 'Monitoring, incident response and performance tuning — the operational work that keeps a system trustworthy after launch.',
+      },
     ],
+    roleAtLetusdeliver:
+      'As co-founder, Mrityunjay owns backend architecture, cloud infrastructure and data engineering at letusdeliver — designing APIs and database architecture, building cloud-native systems, and setting up the CI/CD pipelines and production-reliability practices that keep what ships dependable. That includes evaluating infrastructure and cloud technology choices, and — alongside Kunal — folding AI-assisted workflows into backend implementation, testing and debugging.',
+    buildingLetusdeliver: {
+      stages: ['Backend', 'Data', 'Cloud', 'Infrastructure', 'Reliability'],
+      description:
+        "Mrityunjay's focus at letusdeliver is everything underneath the product — the APIs, data systems and cloud infrastructure engineered to run reliably and scale as it grows.",
+    },
     technologies: [
       { category: 'Backend', items: ['Python', 'FastAPI', 'Django', 'Django REST Framework', 'Flask', 'Celery', 'REST APIs', 'Microservices'] },
-      { category: 'Auth & Security', items: ['JWT', 'RBAC', 'API Permissions', 'Security Scanning'] },
+      { category: 'Security', items: ['JWT', 'RBAC', 'API Permissions', 'Security Scanning'] },
       { category: 'Databases', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Neo4j', 'Google Cloud Datastore'] },
       { category: 'Cloud', items: ['GCP (BigQuery, Cloud Storage, Datastore)', 'AWS (EC2, S3, Lambda)'] },
       { category: 'DevOps & CI/CD', items: ['Docker', 'GitHub Actions', 'Jenkins', 'Git', 'GitLab', 'Linux'] },
-      { category: 'Data Engineering', items: ['Apache Airflow', 'Pandas', 'NumPy', 'ETL Pipelines', 'Data Processing'] },
+      { category: 'Data Engineering', items: ['Apache Airflow', 'Pandas', 'NumPy', 'ETL Pipelines', 'Data Processing', 'Data Pipelines'] },
+      { category: 'AI & Engineering Tools', items: ['AI-Assisted Development', 'AI Coding Agents', 'Engineering Automation', 'Developer Workflows'] },
     ],
     experience: [
       {
         role: 'Backend Python Engineer',
-        organization: 'Insight Global — Client: The Home Depot',
+        organization: 'Insight Global',
         period: 'Dec 2025 – Present',
         highlights: [
-          'Engineers enterprise backend services using Python and FastAPI, developing and maintaining REST APIs for internal developer-facing platforms, monitoring systems and operational tooling.',
-          'Develops and enhances Nightwatch, an enterprise monitoring and operational platform — owning backend service development, production issue investigation, and platform reliability improvements across cloud-native workflows.',
-          'Architects cloud-based data-processing services on GCP, leveraging BigQuery for analytical workloads, Cloud Storage for data persistence, and Datastore for application state management.',
-          'Designs and implements secure CI/CD pipelines using GitHub Actions and Jenkins — automating build, security scanning, containerization (Docker) and deployment workflows.',
-          'Recognized with Rising Star of the Quarter and Platform Guardian awards for engineering contributions, production ownership, and platform reliability. Earned Astronomer Airflow certification.',
+          'Develops and maintains REST APIs for internal developer-facing platforms, monitoring systems and operational tooling.',
+          'Contributes to an enterprise monitoring and operational platform — investigating production issues and improving platform reliability.',
+          'Builds cloud-native data-processing services on GCP, using BigQuery, Cloud Storage and Datastore.',
+          'Designs secure CI/CD pipelines with GitHub Actions and Jenkins, automating build, security scanning, Docker containerization and deployment.',
+          'Contributes to production engineering and operational reliability improvements across cloud-native workflows.',
+          'Recognized with Rising Star of the Quarter and Platform Guardian awards for engineering contributions and production ownership. Earned Astronomer Airflow certification.',
         ],
       },
       {
@@ -180,19 +238,14 @@ export const FOUNDERS: Founder[] = [
           'Developed backend services and REST APIs using Python, Django and Django REST Framework across 20+ client projects spanning domains including payments, social platforms, booking systems, event management, and enterprise management tools.',
           'Implemented JWT-based authentication, role-based access control (RBAC), and API-level permission mechanisms across multiple application services.',
           'Designed relational database schemas using PostgreSQL and MySQL, optimizing query performance through indexing, query rewriting and schema normalization.',
+          'Worked across multiple product teams and technology stacks throughout the engagement.',
         ],
       },
     ],
-    projectSlugs: [
-      'ibkr-signal-scanner',
-      'flowmedic',
-      'careernaukri',
-      'enterprise-data-pipelines',
-      'full-stack-product-applications',
-    ],
+    projectSlugs: ['ibkr-signal-scanner', 'flowmedic', 'careernaukri'],
     certifications: [
       { name: 'Astronomer Airflow Certification', issuer: 'Astronomer', date: 'Apache Airflow workflow orchestration and data pipeline engineering' },
-      { name: 'Google Cloud Platform', issuer: 'Google Cloud', date: 'Professional learning in cloud computing, BigQuery, and GCP services' },
+      { name: 'Google Cloud Platform', issuer: 'Google Cloud', date: 'Professional learning and experience across cloud computing, BigQuery and Google Cloud services' },
     ],
     education: {
       degree: 'B.Tech, Computer Science & Engineering',

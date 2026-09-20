@@ -1,6 +1,6 @@
-<section class="relative overflow-hidden">
+<section appPointerGlow class="relative overflow-hidden">
   <div
-    class="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]"
+    class="ambient-orb pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] rounded-full bg-accent/20 blur-[120px]"
     aria-hidden="true"
   ></div>
 
@@ -21,10 +21,10 @@
 
       <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
         <app-button link="/start-a-project" size="lg" (click)="onStartProjectClick()">
-          Start a Project →
+          Start a Project <span class="btn-arrow">→</span>
         </app-button>
         <app-button variant="secondary" size="lg" href="#featured-work">
-          Explore Our Work ↓
+          Explore Our Work <span class="btn-arrow-down">↓</span>
         </app-button>
       </div>
     </div>
